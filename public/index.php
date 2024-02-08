@@ -1,4 +1,9 @@
 <?php 
+#dbhost = 'localhost';
+#dbuser = 'utco4gqngodjp';
+#dbpass = 'ilovefood';
+#dbname = 'dbokjjlxzzmhf6';
+
 function db_connect() {
   $dbhost = 'localhost';
   $dbuser = 'foodfanatic';
@@ -47,10 +52,9 @@ while($category = mysqli_fetch_assoc($category_set)) {
       <?php foreach($categories as $category) { ?>
         <tr>
           <td><?php echo $category['id_cat']; ?></td>
-          <td><?php echo $category['product_category_name_cat']; ?></td>
+          <td><?php echo $category['category_name_cat']; ?></td>
         </tr>
       <?php } ?>
       </table>
   </body>
 </html>
-
