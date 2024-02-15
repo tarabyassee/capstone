@@ -7,7 +7,7 @@
         <h2> Vendor Menu</h2>
         <ul>
           <li><a href="<?php echo urlFor('/users/vendors/new.php') ?>">Enter New Products</li>
-          <li><a href="<?php echo urlFor('/users/vendors/edit.php') ?>">Edit Products</li>
+          <li><a href="<?php echo urlFor('/users/vendors/edit.php?id=' . h(u($subject['id_prod']))); ?>">Edit Products</li>
         </ul>
       </div>
     </div>
