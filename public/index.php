@@ -4,7 +4,7 @@
 #dbpass = 'ilovefood';
 #dbname = 'dbokjjlxzzmhf6';
 
-function db_connect() {
+function dbConnect() {
   $dbhost = 'localhost';
   $dbuser = 'foodfanatic';
   $dbpass = 'ilovefood';
@@ -13,24 +13,24 @@ function db_connect() {
   return $connection;
 }
 
-function db_disconnect($connection) {
+function dbDisconnect($connection) {
   if(isset($connection)) {
     mysqli_close($connection);
   }
 }
 
-$db = db_connect();
+$db = dbConnect();
 
-function find_all_categories($db) {
+function findAllCategories($db) {
   $sql = "SELECT * FROM product_category_cat";
   $result = mysqli_query($db, $sql);
   return $result;
 }
 
-$category_set = find_all_categories($db);
+$categorySet = findAllCategories($db);
 
 $categories = [];
-while($category = mysqli_fetch_assoc($category_set)) {
+while($category = mysqli_fetch_assoc($categorySet)) {
   $categories[] = $category;
 }
 
@@ -45,6 +45,7 @@ while($category = mysqli_fetch_assoc($category_set)) {
   <body>
     <h1>Asheville Tailgate Market</h1>
     <table border=1>
+      <caption>Data from product_category_name</caption>
       <tr>
         <th>Category ID</th>
         <th>Category Name</th>
