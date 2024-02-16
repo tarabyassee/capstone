@@ -10,5 +10,9 @@
   define("WWW_ROOT", $docRoot);
   
   require_once('functions.php');
+  require_once('database.php');
+  require_once('queryFunctions.php');
+  
+  $db = dbConnect();
 
 ?>

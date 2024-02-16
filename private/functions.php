@@ -1,11 +1,5 @@
 <?php
 
-function findAllCategories($db) {
-  $sql = "SELECT * FROM product_category_cat";
-  $result = mysqli_query($db, $sql);
-  return $result;
-}
-
 function urlFor($script_path) {
   if($script_path[0] != '/') {
     $script_path = "/" . $script_path;
