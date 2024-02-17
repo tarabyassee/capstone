@@ -1,7 +1,7 @@
 <?php 
   require_once('../../../private/initialize.php');
 
-  $id = $GET_['id_prod'] ?? '1';
+  $id = $_GET['id_prod'] ?? '1';
 
   $product = findProductsById($id);
 
@@ -19,19 +19,19 @@
   
   <body>
     <div id="show-body">
-      <h1>Subject: <?php echo h($subject['id_prod']) ?></h1>
+      <h1>Subject: <?php echo h($product['id_prod']) ?></h1>
       <div>
         <dl>
           <dt>Product Id</dt>
-          <dd><?php echo h($subject['id_prod']); ?></dd>
+          <dd><?php echo h($product['id_prod']); ?></dd>
         </dl>
         <dl>
           <dt>Product Name</dt>
-          <dd><?php echo h($subject['product_name_prod']);?></dd>
+          <dd><?php echo h($product['product_name_prod']);?></dd>
         </dl>
         <dl>
           <dt>Product Category</dt>
-          <dd><?php echo h($subject['id_cat_prod']);?></dd>
+          <dd><?php echo h($product['id_cat_prod']);?></dd>
         </dl>
       </div>
 

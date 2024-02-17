@@ -13,6 +13,8 @@
 
   $pageTitle = "Edit Products";
 
+  $ven_id = $_GET['id_ven'] ?? '1';
+
   include(SHARED_PATH . '/users_header.php');
 ?>
 
@@ -32,7 +34,7 @@
       <form action="" method="post">
         <dl>
           <dt>Product Name</dt>
-          <dd><input type="text" name="productName" value=""></dd>
+          <dd><input type="text" name="productName" value=""><?php echo h($products['id_prod']); ?></dd>
         </dl>
         <dl>
           <dt>Category</dt>

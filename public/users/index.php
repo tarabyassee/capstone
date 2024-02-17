@@ -10,6 +10,21 @@
           <li><a href="vendors/index.php">Vendors</li>
         </ul>
       </div>
+
+      <table border=1>
+      <caption>Products</caption>
+      <tr>
+        <th>Product ID</th>
+        <th>Product Name</th>
+        <th>Category Name</th>
+      </tr>
+      <?php foreach($categories as $category) { ?>
+        <tr>
+          <td><?php echo $category['id_cat']; ?></td>
+          <td><?php echo $category['category_name_cat']; ?></td>
+        </tr>
+      <?php } ?>
+      </table>
     </div>
 
 <?php include(SHARED_PATH . '/users_footer.php') ?>

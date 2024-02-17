@@ -1,38 +1,13 @@
 <?php 
-#dbhost = 'localhost';
-#dbuser = 'utco4gqngodjp';
-#dbpass = 'ilovefood';
-#dbname = 'dbokjjlxzzmhf6';
+  require_once('../private/initialize.php');
+  $pageTitle = 'Home';
 
-function dbConnect() {
-  $dbhost = 'localhost';
-  $dbuser = 'foodfanatic';
-  $dbpass = 'ilovefood';
-  $dbname = 'avl_tailgate_market';
-  $connection = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-  return $connection;
-}
+  $categorySet = findAllCategories($db);
 
-function dbDisconnect($connection) {
-  if(isset($connection)) {
-    mysqli_close($connection);
+  $categories = [];
+  while($category = mysqli_fetch_assoc($categorySet)) {
+    $categories[] = $category;
   }
-}
-
-$db = dbConnect();
-
-function findAllCategories($db) {
-  $sql = "SELECT * FROM product_category_cat";
-  $result = mysqli_query($db, $sql);
-  return $result;
-}
-
-$categorySet = findAllCategories($db);
-
-$categories = [];
-while($category = mysqli_fetch_assoc($categorySet)) {
-  $categories[] = $category;
-}
 
 ?>
 <!DOCTYPE html>
