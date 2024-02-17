@@ -44,4 +44,17 @@ function findAllProductsByVendorId($ven_id) {
   return $products;
 }
 
+function getUserVendorInformation($id_user) {
+  global $db;
+  $sql = "SELECT u.first_name_usr, v.vendor_name_ven, v.id_ven ";
+  $sql .= "FROM user_usr u JOIN vendor_ven v ";
+  $sql .= "WHERE u.id_usr = $id_user";
+  echo $sql;
+  $result = mysqli_query($db, $sql);
+  confirmResultSet($result);
+  $subject = mysqli_fetch_assoc($result);
+  mysqli_free_result($result);
+  return $subject;
+}
+
 ?>
