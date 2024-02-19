@@ -1,17 +1,8 @@
 <?php 
   require_once('../../../private/initialize.php');
 
-  $test = $_GET['test'] ?? '';
-
-  if($test == '404') {
-    error_404();
-  } elseif($test == '500') {
-    error_500();
-  } elseif($test == 'redirect') {
-    redirectTo(urlFor('/users/vendors/index.php'));
-  } 
-
-  $pageTitle = "Insert Products";
+  $productId = $_GET['id'] ?? '';
+  $pageTitle = "New Product";
 
   include(SHARED_PATH . '/users_header.php');
 ?>

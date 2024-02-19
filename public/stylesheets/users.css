@@ -1,5 +1,5 @@
 html {
-  font: 18 px Gothic, serif;
+  font: 18px 'Julius Sans One', Helvetica, sans-serif;
 }
 
 h1 {
@@ -7,5 +7,19 @@ h1 {
 }
 
 table {
+  border: #333 solid 1px;
   border-collapse: collapse;
+  margin: 2rem;
+  padding: .5rem;
+  table-layout: fixed;
+  width: 80%;
+}
+
+th {
+  background-color: greenyellow;
+  white-space: nowrap;
+}
+
+td {
+  text-align: center;
 }

@@ -34,7 +34,7 @@ function redirectTo($location) {
   exit;
 }
 
-function is_post_request() {
+function isPostRequest() {
   return $_SERVER['REQUEST_METHOD'] == 'POST';
 }
 

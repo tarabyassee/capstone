@@ -33,7 +33,6 @@ function findAllProductsByVendorId($ven_id) {
   $sql .= "INNER JOIN vendor_ven v ";
   $sql .= "ON vj.id_ven_vjunc = v.id_ven ";
   $sql .= "WHERE v.id_ven = '" . dbEscape($db, $ven_id) . "'";
-  echo $sql;
   $result = mysqli_query($db, $sql);
   confirmResultSet($result);
   $products = [];
@@ -44,11 +43,24 @@ function findAllProductsByVendorId($ven_id) {
   return $products;
 }
 
-function getUserVendorInformation($id_user) {
+function getUserVendorInformation($user_id) {
   global $db;
   $sql = "SELECT u.first_name_usr, v.vendor_name_ven, v.id_ven ";
   $sql .= "FROM user_usr u JOIN vendor_ven v ";
-  $sql .= "WHERE u.id_usr = $id_user";
+  $sql .= "WHERE u.id_usr = $user_id";
+  #echo $sql;
+  $result = mysqli_query($db, $sql);
+  confirmResultSet($result);
+  $subject = mysqli_fetch_assoc($result);
+  mysqli_free_result($result);
+  return $subject;
+}
+
+function getUserInformation($user) {
+  global $db;
+  $sql = "SELECT u.id_usr, u.first_name_usr, u.last_name_usr, u.phone_number_usr, t.type_phn, u.email_usr, u.username_usr, u.is_admin ";
+  $sql .= "FROM user_usr u JOIN phone_type_phn t ";
+  $sql .= "WHERE u.id_phn_usr = t.id_phn";
   echo $sql;
   $result = mysqli_query($db, $sql);
   confirmResultSet($result);
@@ -56,5 +68,23 @@ function getUserVendorInformation($id_user) {
   mysqli_free_result($result);
   return $subject;
 }
+
+function getVendorInformation($ven_id) {
+  global $db;
+  $sql = "SELECT v.id_ven, v.vendor_name_ven, v.vendor_description_ven, v.vendor_address_ven, v.vendor_city_ven, s.name_sta, v.stall_number_ven ";
+  $sql .= "FROM vendor_ven v JOIN state_sta s ";
+  $sql .= "ON v.id_sta_ven = s.id_sta ";
+  $sql .= "WHERE v.id_ven = $ven_id";
+  $result = mysqli_query($db, $sql);
+  confirmResultSet($result);
+  $subject = mysqli_fetch_assoc($result);
+  mysqli_free_result($result);
+  return $subject;
+}
+
+function getProductInformation($product) {
+  
+}
+
 
 ?>

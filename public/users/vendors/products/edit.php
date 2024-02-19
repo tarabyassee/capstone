@@ -1,5 +1,8 @@
 <?php 
   require_once('../../../private/initialize.php');
+  if(!isset($_GET['id_prod'])) {
+    redirectTo(urlFor('/vendors/products/index.php'));
+  }
 
   $test = $_GET['test'] ?? '';
 
@@ -13,7 +16,7 @@
 
   $pageTitle = "Edit Products";
 
-  $ven_id = $_GET['id_ven'] ?? '1';
+  $prod_id = $_GET['id_prod'] ?? '1';
 
   include(SHARED_PATH . '/users_header.php');
 ?>

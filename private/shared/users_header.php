@@ -7,15 +7,15 @@ if(!isset($pageTitle)) {$pageTitle = 'AAA';}
   <head>
     <meta charset="utf-8">
     <title><?php echo $pageTitle ?></title>
-    <link rel="stylesheet" media="all" href="../stylesheets/staff.css">
+    <link rel="stylesheet" media="all" href="<?php echo urlFor('stylesheets/users.css') ?>">
   </head>
   
   <body>
     <header>
-      <h1>Users' Menu</h1>
+      <h1>User</h1>
     </header>
     <nav>
       <ul>
-        <li><a href="../index.php">Back one level</a></li>
+        <li><a href="<?php echo urlFor('/users/index.php'); ?>">Main Menu</a></li>
       </ul>
     </nav>
