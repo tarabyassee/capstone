@@ -55,7 +55,7 @@
           <th>Name</th>
           <th>Category</th>
         </tr>
-        <a href="<?php echo urlFor('users/vendors/products/new.php');?>">Add a new product</a>
+        <a href="products/new.php">Add a new product</a>
         <?php foreach($productSet as $product) { ?>
           <tr>
             <td><?php echo $product['id_prod']?></td>

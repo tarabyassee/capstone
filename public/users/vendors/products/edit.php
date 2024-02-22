@@ -16,7 +16,17 @@
 
   $pageTitle = "Edit Products";
 
-  $prod_id = $_GET['id_prod'] ?? '1';
+  $id_prod = $_GET['id_prod'] ?? '1';
+
+  if(isPostRequest()) {
+    $product = [];
+    $product['id_prod'] = $_POST['id_prod'];
+    $product['product_name'] =$_POST['product_name'];
+    $product['category_name'] =$POST['category_name'];
+
+  $result = updateProduct($product);
+
+  }
 
   include(SHARED_PATH . '/users_header.php');
 ?>

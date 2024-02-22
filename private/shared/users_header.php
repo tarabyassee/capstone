@@ -8,6 +8,7 @@ if(!isset($pageTitle)) {$pageTitle = 'AAA';}
     <meta charset="utf-8">
     <title><?php echo $pageTitle ?></title>
     <link rel="stylesheet" media="all" href="<?php echo urlFor('stylesheets/users.css') ?>">
+    <script src="<?php echo urlFor('js/script.js')?>"></script>
   </head>
   
   <body>

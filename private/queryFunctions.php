@@ -82,8 +82,33 @@ function getVendorInformation($ven_id) {
   return $subject;
 }
 
-function getProductInformation($product) {
-  
+function getCategories() {
+  global $db;
+  $sql = "SELECT * FROM product_category_cat";
+  $result = mysqli_query($db, $sql);
+  $categories = array();
+  while($row = mysqli_fetch_assoc($result)) {
+    $categories[] = $row;
+  };
+  mysqli_free_result($result);
+  return $categories;
+}
+
+function getProductsByCategory($categoryId) {
+  global $db;
+
+  $sql = "SELECT p.product_name_prod ";
+  $sql .= "FROM product_prod p ";
+  $sql .= "JOIN product_category_cat pc ";
+  $sql .= "ON p.id_cat_prod = pc.id_cat ";
+  $sql .= "WHERE pc.id_cat = $categoryId";
+
+  $result = mysqli_query($db, $sql);
+  $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  echo '<pre>';
+  var_dump($products);
+  echo '<pre>';
+  return $products;
 }
 
 
