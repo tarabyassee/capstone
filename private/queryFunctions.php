@@ -111,5 +111,9 @@ function getProductsByCategory($categoryId) {
   return $products;
 }
 
+/* function findByUsername($username) {
+  $sql = 
+} */
+
 
 ?>

@@ -1,0 +1,110 @@
+:root {
+  --lightBlue: #E9F2F2;
+  --lightYellow: #FDFDC2;
+  --pink: #F98E8E;
+  --salmon: #F9C3A0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font: 18px 'Julius Sans One', Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  height: auto;
+  max-width: 100%;
+}
+
+/********** Main Index Page **********/
+
+#logo {
+  display: block;
+  margin: auto auto;
+}
+
+/********** Mobile Sliding Nav **********/
+.clicker {
+  color: #333;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidenav {
+  padding: 10px 20px;
+  width: 0;
+  transition-delay: 0.3s;
+  transition: 0.5s ease-in-out;
+}
+
+.active .sidenav {
+  height: 100vh;
+  padding: 10px 0;
+  position: fixed;
+  transition: 0.5s ease-in-out;
+  width: 220px;
+}
+
+.items {
+  display: none;
+  padding: 20px;
+
+}
+
+.active .items {
+  display: block;
+}
+
+.items ul {
+  list-style: none;
+}
+
+.items ul li {
+  background-color: black;
+  border: 1px solid black;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, .05);
+  font-size: 16px;
+  height: 40px;
+  margin: 10px 0;
+  transition: 0.5s ease-in;
+}
+
+.items li a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+
+
+h1 {
+  color: red;
+}
+
+
+table {
+  border: #333 solid 1px;
+  border-collapse: collapse;
+  margin: 2rem;
+  padding: .5rem;
+  table-layout: fixed;
+  width: 80%;
+}
+
+th {
+  background-color: greenyellow;
+  white-space: nowrap;
+}
+
+td {
+  text-align: center;
+}

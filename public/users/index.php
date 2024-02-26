@@ -1,5 +1,5 @@
 <?php require_once('../../private/initialize.php');?>
-<?php $pageTitle = 'User Menu'?>
+<?php $pageTitle = 'User Menu';?>
 
 <?php include(SHARED_PATH . '/users_header.php') ?>
     <div id="content">

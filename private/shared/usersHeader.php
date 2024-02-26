@@ -1,5 +1,6 @@
-<?php 
-if(!isset($pageTitle)) {$pageTitle = 'AAA';} 
+<?php
+   
+  if(!isset($pageTitle)) {$pageTitle = 'AAA';} 
 ?>
 
 <!DOCTYPE html>

@@ -8,16 +8,6 @@
   include(SHARED_PATH . '/users_header.php'); 
 ?>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Document</title>
-    <script src="public/js/script.js" defer></script>
-    <link rel="stylesheet" src="public/stylesheets/users.css">
-  </head>
-  
-  <body> -->
     <div id="content">
       <a class="backlink" href="<?php echo urlFor('/users/vendors/index.php');?>">&laquo; Back to List</a>
 
@@ -35,7 +25,7 @@
           ?>
         </select>
         <div id="checkboxContainer">
-          
+
         </div>
         <input type="submit" value="See Products">
       </form>
