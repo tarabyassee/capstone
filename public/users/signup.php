@@ -19,13 +19,13 @@
 
           <fieldset>
             <legend>Phone Type</legend>
-            <input type="radio" id="1" name="phonetype">
+            <input type="radio" value="1" name="phonetype">
             <label for="1">Cell Phone</label>
 
-            <input type="radio" id="2" name="phonetype">
+            <input type="radio" value="2" name="phonetype">
             <label for="2">Home Phone</label>
 
-            <input type="radio" id="3" name="phonetype">
+            <input type="radio" value="3" name="phonetype">
             <label for="3">Work Phone</label>
 
           </fieldset>

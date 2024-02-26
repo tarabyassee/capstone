@@ -1,4 +1,5 @@
 <?php
+  require_once('initialize.php');
   if(isset($_POST["submit"])) {
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
@@ -26,12 +27,12 @@
       header("Location: ../public/users/signup.php?error=nomatch");
       exit();
     }
-    if (usernameExists($conn, $username, $email) !== false) {
+    if (usernameExists($db, $username, $email) !== false) {
       header("Location: ../public/users/signup.php?error=usernameTaken");
       exit();
     }
 
-    createUser($conn, $fname, $lname, $phone, $phonetype, $email, $username, $pwd, $pwdRepeat);
+    createUser($db, $fname, $lname, $phone, $phonetype, $email, $username, $pwd, $pwdRepeat);
 
 
   } else {
