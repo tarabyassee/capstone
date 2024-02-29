@@ -1,23 +1,35 @@
 <?php
-   
+session_start();
   if(!isset($pageTitle)) {$pageTitle = 'AAA';} 
+$pageTitle = 'Vendor'
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+  <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle ?></title>
     <link rel="stylesheet" media="all" href="<?php echo urlFor('stylesheets/users.css') ?>">
-    <script src="<?php echo urlFor('js/script.js')?>"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/0a06179f50.js" crossorigin="anonymous"></script>
+    <script src="<?php echo urlFor('js/script.js') ?>" defer></script>
   </head>
-  
+
   <body>
-    <header>
-      <h1>User</h1>
-    </header>
-    <nav>
-      <ul>
-        <li><a href="<?php echo urlFor('/users/index.php'); ?>">Main Menu</a></li>
-      </ul>
-    </nav>
+    <div id="wrapper">
+      <header role="banner">
+        <img id="logo" src="<?php echo urlFor('/images/avlTmLogo160.png') ?>">
+      </header>
+      <nav role="navigation" class="items">
+        <ul id="userMenuLoggedIn">
+          <?php
+            if (isset($_SESSION["loggedusername"])) {
+              echo "<li><a href='" . urlFor('/users/profile.php') . "'>Profile</a></li>";
+              echo "<li><a href='" . urlFor('/users/logout.php') . "'>Logout</a></li>";
+              echo "<li><a href='" . urlFor('/index.php') . "'>Main Home Page</a></li>";
+            }
+            ?>
+        </ul>
+      </nav>

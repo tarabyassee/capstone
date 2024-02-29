@@ -1,7 +1,7 @@
 <?php 
   $pageTitle = 'Home';
   require_once('../../private/initialize.php');
-  require_once('../../private/shared/publicHeader.php');
+  require_once('../../private/shared/usersHeader.php');
 ?>
   
     <body>
@@ -42,10 +42,24 @@
           <label for="pwd">*Re-enter Password</label>
           <input type="password" id="pwdrepeat" name="pwdrepeat" required>
 
+          
+
           <button type="submit" name="submit">Sign Up!</button>
         </form>
       </section>
-
+      <?php
+      if(isset($_GET["error"])) {
+        if($_GET["error"] == "nomatch") {
+          echo "<p>Passwords don't match</p>";
+        }
+        else if($_GET["error"] == "usernameTaken") {
+          echo "<p>This username already exists. Please choose another.</p>";
+        }
+        else if($_GET["error"] == "none") {
+          echo "<p>Congratulations! You have signed up.</p>";
+        }
+      }
+      ?>
     </body>
   </div>
 </html>

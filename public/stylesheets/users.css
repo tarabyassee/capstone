@@ -1,10 +1,75 @@
+:root {
+  --darkOlive: #577b5c;
+  --lightBlue: #E9F2F2;
+  --lightYellow: #FDFDC2;
+  --pink: #F98E8E;
+  --salmon: #F9C3A0;
+}
+
+.julius-sans one-regular {
+  font-family: "Julius Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html {
   font: 18px 'Julius Sans One', Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+header {
+  background-color: var(--lightBlue);
+  border-bottom: 2px solid var(--darkOlive);
+  height: 120px;
+  position: relative;
+  width: 100%;
+}
+
+#logo {
+  display: block;
+  margin: auto auto;
 }
 
 h1 {
   color: red;
 }
+
+/********** Nav Bar - large screen **********/
+
+#userMenuLoggedIn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+}
+
+#userMemberLoggedIn li {
+  display: block;
+  flex: 1;
+  padding-right: 1rem;
+}
+
+/********** end of nav **********/
 
 table {
   border: #333 solid 1px;

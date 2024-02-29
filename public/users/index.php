@@ -1,7 +1,7 @@
 <?php require_once('../../private/initialize.php');?>
 <?php $pageTitle = 'User Menu';?>
 
-<?php include(SHARED_PATH . '/users_header.php') ?>
+<?php include(SHARED_PATH . '/usersHeader.php') ?>
     <div id="content">
       <div id="menu">
         <h2>Menu</h2>

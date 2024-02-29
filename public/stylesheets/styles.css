@@ -1,8 +1,15 @@
 :root {
+  --darkOlive: #577b5c;
   --lightBlue: #E9F2F2;
   --lightYellow: #FDFDC2;
   --pink: #F98E8E;
   --salmon: #F9C3A0;
+}
+
+.julius-sans one-regular {
+  font-family: "Julius Sans One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 * {
@@ -19,76 +26,87 @@ body {
 }
 
 #wrapper {
+  display: flex;
+  flex-direction: column;
   height: auto;
   max-width: 100%;
 }
 
-/********** Main Index Page **********/
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+header {
+  background-color: var(--lightBlue);
+  border-bottom: 2px solid var(--darkOlive);
+  height: 120px;
+  position: relative;
+  width: 100%;
+}
 
 #logo {
   display: block;
   margin: auto auto;
 }
 
-/********** Mobile Sliding Nav **********/
-.clicker {
-  color: #333;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.sidenav {
-  padding: 10px 20px;
-  width: 0;
-  transition-delay: 0.3s;
-  transition: 0.5s ease-in-out;
-}
-
-.active .sidenav {
-  height: 100vh;
-  padding: 10px 0;
-  position: fixed;
-  transition: 0.5s ease-in-out;
-  width: 220px;
-}
-
-.items {
-  display: none;
-  padding: 20px;
-
-}
-
-.active .items {
-  display: block;
-}
-
-.items ul {
-  list-style: none;
-}
-
-.items ul li {
-  background-color: black;
-  border: 1px solid black;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, .05);
-  font-size: 16px;
-  height: 40px;
-  margin: 10px 0;
-  transition: 0.5s ease-in;
-}
-
-.items li a {
-  color: #fff;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 0 10px;
-  text-decoration: none;
-}
-
-
-
 h1 {
   color: red;
 }
+
+/********** Nav Bar - large screen **********/
+#navbar {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Julius Sans One';
+  justify-content: space-between;
+  list-style: none;
+  margin-top: 3rem;
+  padding: 0;
+}
+
+#navbar li {
+  margin: 0 10px;
+}
+
+#userMenu {
+  display: flex;
+  flex-direction: row;
+  margin-left: 0;
+}
+
+#menu {
+  display: flex;
+  flex-direction: row;
+  margin-right: 0;
+}
+
+/********** end of nav **********/
+/**********home page **********/
+#info-container {
+  display: flex;
+  flex-direction: row;
+}
+
+#info-container div {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+
+#when {
+  border-left: 2px solid #333;
+  border-right: 2px solid #333;
+  margin-left: 2rem;
+}
+
+#where {
+  border-right: 2px solid #333;
+  margin-right: 2rem;
+}
+
 
 
 table {
