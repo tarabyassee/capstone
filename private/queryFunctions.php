@@ -21,9 +21,8 @@ function findProductsById($id) {
   return $subject;
 }
 
-function findAllProductsByVendorId($ven_id) {
+function findAllProductsByVendorId($vendorId) {
   global $db;
-
   $sql = "SELECT p.id_prod, p.product_name_prod, c.category_name_cat ";
   $sql .= "FROM product_prod p ";
   $sql .= "INNER JOIN product_category_cat c ";
@@ -32,7 +31,7 @@ function findAllProductsByVendorId($ven_id) {
   $sql .= "ON p.id_prod = vj.id_prod_vjunc ";
   $sql .= "INNER JOIN vendor_ven v ";
   $sql .= "ON vj.id_ven_vjunc = v.id_ven ";
-  $sql .= "WHERE v.id_ven = '" . dbEscape($db, $ven_id) . "'";
+  $sql .= "WHERE v.id_ven = $vendorId";
   $result = mysqli_query($db, $sql);
   confirmResultSet($result);
   $products = [];
@@ -43,12 +42,12 @@ function findAllProductsByVendorId($ven_id) {
   return $products;
 }
 
-function getUserVendorInformation($user_id) {
+function getUserVendorInformation($userId) {
   global $db;
-  $sql = "SELECT u.first_name_usr, v.vendor_name_ven, v.id_ven ";
-  $sql .= "FROM user_usr u JOIN vendor_ven v ";
-  $sql .= "WHERE u.id_usr = $user_id";
-  #echo $sql;
+  $sql = "SELECT vendor_name_ven, id_ven, vendor_description_ven, stall_number_ven ";
+  $sql .= "FROM vendor_ven ";
+  $sql .= "WHERE id_usr_ven = $userId";
+  echo $sql;
   $result = mysqli_query($db, $sql);
   confirmResultSet($result);
   $subject = mysqli_fetch_assoc($result);
@@ -69,12 +68,11 @@ function getUserInformation($user) {
   return $subject;
 }
 
-function getVendorInformation($ven_id) {
+function getVendorInformation($vendorId) {
   global $db;
-  $sql = "SELECT v.id_ven, v.vendor_name_ven, v.vendor_description_ven, v.vendor_address_ven, v.vendor_city_ven, s.name_sta, v.stall_number_ven ";
-  $sql .= "FROM vendor_ven v JOIN state_sta s ";
-  $sql .= "ON v.id_sta_ven = s.id_sta ";
-  $sql .= "WHERE v.id_ven = $ven_id";
+  $sql = "SELECT v.id_ven, v.vendor_name_ven, v.vendor_description_ven, v.stall_number_ven ";
+  $sql .= "FROM vendor_ven v ";
+  $sql .= "WHERE v.id_ven = $vendorId";
   $result = mysqli_query($db, $sql);
   confirmResultSet($result);
   $subject = mysqli_fetch_assoc($result);
@@ -102,7 +100,7 @@ function getProductsByCategory($categoryId) {
   $sql .= "JOIN product_category_cat pc ";
   $sql .= "ON p.id_cat_prod = pc.id_cat ";
   $sql .= "WHERE pc.id_cat = $categoryId";
-
+  echo $sql;
   $result = mysqli_query($db, $sql);
   $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
   echo '<pre>';
@@ -111,9 +109,17 @@ function getProductsByCategory($categoryId) {
   return $products;
 }
 
-/* function findByUsername($username) {
-  $sql = 
-} */
+function getVendorId($userId) {
+  global $db;
+  $sql = "SELECT id_ven ";
+  $sql .= "FROM vendor_ven ";
+  $sql .= "WHERE id_usr_ven = $userId LIMIT 1";
+  $result = mysqli_query($db, $sql);
+  confirmResultSet($result);
+  $subject = mysqli_fetch_assoc($result);
+  mysqli_free_result($result);
+  return $subject;
+}
 
 
 ?>

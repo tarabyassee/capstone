@@ -55,6 +55,9 @@ h1 {
 }
 
 /********** Nav Bar - large screen **********/
+#usersNavigation {
+  padding-top: 2rem;
+}
 
 #userMenuLoggedIn {
   display: flex;

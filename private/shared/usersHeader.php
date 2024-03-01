@@ -22,12 +22,12 @@ $pageTitle = 'Vendor'
       <header role="banner">
         <img id="logo" src="<?php echo urlFor('/images/avlTmLogo160.png') ?>">
       </header>
-      <nav role="navigation" class="items">
+      <nav role="navigation" id="usersNavigation">
         <ul id="userMenuLoggedIn">
           <?php
             if (isset($_SESSION["loggedusername"])) {
               echo "<li><a href='" . urlFor('/users/profile.php') . "'>Profile</a></li>";
-              echo "<li><a href='" . urlFor('/users/logout.php') . "'>Logout</a></li>";
+              echo "<li><a href='" . urlFor('/private/processLogout.php') . "'>Logout</a></li>";
               echo "<li><a href='" . urlFor('/index.php') . "'>Main Home Page</a></li>";
             }
             ?>

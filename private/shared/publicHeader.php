@@ -34,8 +34,8 @@ if (!isset($pageTitle)) {
             echo "<li><a href='" . urlFor('/users/profile.php') . "'>Profile</a></li>";
             echo "<li><a href='" . urlFor('/users/logout.php') . "'>Logout</a></li>";
           } else {
-            echo "<li><a href='" . urlFor('/public/users/login.php') . "'>Login</a></li>";
-            echo "<li><a href='" . urlFor('/public/users/signup.php') . "'>Sign Up</a></li>";
+            echo "<li><a href='" . urlFor('/users/login.php') . "'>Login</a></li>";
+            echo "<li><a href='" . urlFor('/users/signup.php') . "'>Sign Up</a></li>";
           }
           ?>
         </div>
