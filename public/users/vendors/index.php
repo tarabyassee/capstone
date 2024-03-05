@@ -4,6 +4,7 @@
   include(SHARED_PATH . '/usersHeader.php');
 
   if(isset($_SESSION["loggeduserid"])) {
+    echo "<p>Hello there, " . $_SESSION["loggedusername"] . "</p>";
     $userId = $_SESSION["loggeduserid"];
     echo $userId;
     $vendorIdSet = getVendorId($userId);
@@ -42,6 +43,7 @@
                   <th>Name</th>
                   <th>Description</th>
                   <th>Stall Number</th>
+                  <th>Edit</th>
                   <th>&nbsp</th>
                 </tr>
 
@@ -50,6 +52,7 @@
                   <td><?php echo $vendorInfo['vendor_name_ven']?></td>
                   <td><?php echo $vendorInfo['vendor_description_ven']?></td>
                   <td><?php echo $vendorInfo['stall_number_ven']?></td>
+                  <td><a class="action" href="<?php echo urlFor('/users/vendors/edit.php?id=' . h(u($vendorInfo['id_ven']))); ?>">Edit</a></td>
                 </tr>
               </table>
         <?php 
@@ -63,6 +66,7 @@
             <th>Product ID</th>
             <th>Name</th>
             <th>Category</th>
+            <th></th>
           </tr>
           <a href="products/new.php">Add a new product</a>
           <?php 
@@ -72,6 +76,8 @@
                   <td><?php echo $product['id_prod']?></td>
                   <td><?php echo $product['product_name_prod']?></td>
                   <td><?php echo $product['category_name_cat']?></td>
+                  <td><a class="action" href="<?php echo urlFor('/users/vendors/products/show.php?id=' . h(u($product['id_prod']))); ?>">View</a></td>
+                  <td><a class="action" href="<?php echo urlFor('/users/vendors/products/delete.php?id=' . h(u($product['id_prod']))); ?>">Delete</a></td>
                 </tr>
           <?php 
               }
@@ -81,12 +87,11 @@
           ?>
         </table>
         <ul>
-          <li><a href="<?php echo urlFor('/users/vendors/new.php') ?>">Enter New Products</li>
-          <li><a href="<?php echo urlFor('/users/vendors/edit.php?id=' . h(u($product['id_prod']))); ?>">Product Information</li>
-          <li><a href="<?php echo urlFor('/users/vendors/show.php?id=' . h(u($product['id_prod']))); ?>">Vendor Information</li>
+          <li><a href="<?php echo urlFor('/users/vendors/new.php') ?>">Add New Products</li>
+          <li><a href="<?php echo urlFor('/users/vendors/edit.php?id=' . h(u($product['id_prod']))); ?>">Edit Products</li>
+          <li><a href="<?php echo urlFor('/users/vendors/show.php?id=' . h(u($product['id_prod']))); ?>">Edit Vendor Information</li>
         </ul>
       </div>
     </div>
-  </body>
-</html>
-<?php include(SHARED_PATH . '/users_footer.php') ?>
+
+<?php include(SHARED_PATH . '/usersFooter.php') ?>

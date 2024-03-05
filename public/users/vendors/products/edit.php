@@ -4,16 +4,6 @@
     redirectTo(urlFor('/vendors/products/index.php'));
   }
 
-  $test = $_GET['test'] ?? '';
-
-  if($test == '404') {
-    error_404();
-  } elseif($test == '500') {
-    error_500();
-  } elseif($test == 'redirect') {
-    redirectTo(urlFor('/users/vendors/index.php'));
-  } 
-
   $pageTitle = "Edit Products";
 
   $id_prod = $_GET['id_prod'] ?? '1';

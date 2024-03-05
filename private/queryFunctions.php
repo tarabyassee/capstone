@@ -16,9 +16,10 @@ function findProductsById($id) {
   echo $sql;
   $result = mysqli_query($db, $sql);
   confirmResultSet($result);
-  $subject = mysqli_fetch_assoc($result);
+  $product = mysqli_fetch_assoc($result);
+  var_dump($product);
   mysqli_free_result($result);
-  return $subject;
+  return $product;
 }
 
 function findAllProductsByVendorId($vendorId) {
@@ -84,12 +85,15 @@ function getCategories() {
   global $db;
   $sql = "SELECT * FROM product_category_cat";
   $result = mysqli_query($db, $sql);
-  $categories = array();
-  while($row = mysqli_fetch_assoc($result)) {
-    $categories[] = $row;
-  };
+  if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      echo "<option value='" . $row["id_cat"] . "'>" . $row["category_name_cat"] . "</options>";
+    }
+  } else {
+    echo "No categories found";
+  }
+
   mysqli_free_result($result);
-  return $categories;
 }
 
 function getProductsByCategory($categoryId) {
@@ -97,16 +101,14 @@ function getProductsByCategory($categoryId) {
 
   $sql = "SELECT p.product_name_prod ";
   $sql .= "FROM product_prod p ";
-  $sql .= "JOIN product_category_cat pc ";
-  $sql .= "ON p.id_cat_prod = pc.id_cat ";
-  $sql .= "WHERE pc.id_cat = $categoryId";
-  echo $sql;
-  $result = mysqli_query($db, $sql);
-  $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-  echo '<pre>';
-  var_dump($products);
-  echo '<pre>';
-  return $products;
+  $sql .= "WHERE id_cat_prod = ?";
+  $stmt = mysqli_prepare($db, $sql);
+  mysqli_stmt_bind_param($stmt, "i", $categoryId);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  $product = mysqli_fetch_assoc($result);
+  mysqli_stmt_close($stmt);
+  return $product;
 }
 
 function getVendorId($userId) {
@@ -121,5 +123,26 @@ function getVendorId($userId) {
   return $subject;
 }
 
+function insertIntoProducts($productName, $categoryId) {
+  global $db;
+  $sql = "INSERT INTO product_prod (product_name_prod, id_cat_prod) ";
+  $sql .= "VALUES (?, ?)";
+  $stmt = mysqli_stmt_init($db);
+  if (!mysqli_stmt_prepare($stmt, $sql)) {
+    header("Location: ../public/users/vendors/products/new.php?error=stmtFailed");
+    exit();
+  }
+  mysqli_stmt_bind_param($stmt, "si", $productName, $categoryId);
+  $result = mysqli_stmt_execute($stmt);
+  if ($result) {
+    $newId = mysqli_insert_id($db);
+    header("Location: ../products/show.php?id=" . $newId);
+    exit();
+  } else {
+    header("Location: ../public/users/vendors/products/new.php?error=failedToAdd");
+    exit();
+    }
+    mysqli_stmt_close($stmt);
+  }
 
 ?>

@@ -6,5 +6,5 @@
   
     <main>
       <h1>You are logged out.</h1>
-      <li><a href="<?php echo urlFor('index.php');?>">Main Page</a></li>
+      <li><a href="<?php echo urlFor('../index.php');?>">Main Page</a></li>
     </main>

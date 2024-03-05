@@ -1,13 +1,12 @@
 <?php 
-  require_once('../../../private/initialize.php');
-
-  $id = $_GET['id_prod'] ?? '1';
-
-  $product = findProductsById($id);
+  require_once('../../../../private/initialize.php');
 
   $pageTitle = 'Show Product';
+  $categoryId = $_GET['id'];
 
-  include(SHARED_PATH . '/users_header.php');
+  $product = findProductsById($categoryId);
+
+  include(SHARED_PATH . '/usersHeader.php');
 ?>
 
 <!DOCTYPE html>

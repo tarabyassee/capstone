@@ -219,3 +219,41 @@ function loginUser($db, $username, $pwd) {
     exit();
   }
 }
+
+function createProduct($db, $fname, $lname, $phone, $phonetype, $email, $username, $pwd) {
+  $sql_select = "SELECT id_phn FROM phone_type_phn WHERE type_phn = ? ";
+  $stmt_select = mysqli_stmt_init($db);
+
+  if(!mysqli_stmt_prepare($stmt_select, $sql_select)) {
+    header("Location: ../public/users/signup.php?error=selectStmtFailed");
+    exit();
+  }
+
+  mysqli_stmt_bind_param($stmt_select, "s", $phonetype);
+  mysqli_stmt_execute($stmt_select);
+
+  if(mysqli_stmt_error($stmt_select)) {
+    header("Location: ../public/users/signup.php?error=stmtSelectError");
+    exit();
+  }
+
+  $result = mysqli_stmt_get_result($stmt_select);
+  $row = mysqli_fetch_assoc($result);
+  $id_phn_usr = $row['id_phn'];
+
+  $sql_insert = "INSERT INTO user_usr (first_name_usr, last_name_usr, phone_number_usr, id_phn_usr, email_usr, username_usr, password_hashed_usr) VALUES (?, ?, ?, ?, ?, ?, ?)";
+  $stmt = mysqli_stmt_init($db);
+
+  if (!mysqli_stmt_prepare($stmt, $sql_insert)) {
+    header("Location: ../public/users/signup.php?error=stmtFailed");
+    exit();
+  }
+
+  $hashedPwd = password_hash($pwd, PASSWORD_BCRYPT);
+  mysqli_stmt_bind_param($stmt, "sssisss", $fname, $lname, $phone, $id_phn_usr, $email, $username, $hashedPwd);
+
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+
+  header("Location: ../public/users/signup.php?error=none");
+}
