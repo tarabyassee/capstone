@@ -1,14 +1,14 @@
 <?php
   require_once('initialize.php');
-  if(isset($_POST["submit"])) {
-    $fname = $_POST["fname"];
-    $lname = $_POST["lname"];
-    $phone = $_POST["phone"];
-    $phonetype = $_POST["phonetype"];
-    $email = $_POST["email"];
-    $username = $_POST["username"];
-    $pwd = $_POST["pwd"];
-    $pwdRepeat = $_POST["pwdrepeat"];
+  if(isset($_POST['submit'])) {
+    $fname = $_SESSION['fname'];
+    $lname = $_POST['lname'];
+    $phone = $_POST['phone'];
+    $phonetype = $_POST['phonetype'];
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $pwd = $_POST['pwd'];
+    $pwdRepeat = $_POST['pwdrepeat'];
 
     require_once 'initialize.php';
     require_once 'validationFunctions.php';

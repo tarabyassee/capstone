@@ -1,5 +1,6 @@
 <?php 
   require_once('../../../private/initialize.php');
+  session_start();
   if(!isset($_GET['id_prod'])) {
     redirectTo(urlFor('/vendors/products/index.php'));
   }

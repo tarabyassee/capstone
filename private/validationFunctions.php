@@ -208,15 +208,22 @@ function loginUser($db, $username, $pwd) {
   $checkPwd = password_verify($pwd, $pwdHashed);
 
   if($checkPwd === false) {
-    header("Location: ..login.php?error=wronglogin");
+    header("Location:../public/users/login.php?error=wronglogin");
     exit();
   } else if ($checkPwd === true) {
     session_start();
     $_SESSION["loggeduserid"] = $usernameExists['id_usr'];
     $_SESSION["loggedusername"] = $usernameExists['username_usr'];
     $_SESSION["loggedfname"] = $usernameExists['first_name_usr'];
-    header("Location: ../public/users/vendors/index.php");
-    exit();
+    $_SESSION["isAdmin"] = $usernameExists['is_admin'];
+
+    if ($_SESSION["isAdmin"] == 1) {
+      header("Location: ../public/users/admins/index.php");
+      exit();
+    } else {
+      header("Location: ../public/users/vendors/index.php");
+      exit();
+    }
   }
 }
 

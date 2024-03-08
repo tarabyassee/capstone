@@ -71,14 +71,16 @@ function getUserInformation($user) {
 
 function getVendorInformation($vendorId) {
   global $db;
-  $sql = "SELECT v.id_ven, v.vendor_name_ven, v.vendor_description_ven, v.stall_number_ven ";
-  $sql .= "FROM vendor_ven v ";
-  $sql .= "WHERE v.id_ven = $vendorId";
-  $result = mysqli_query($db, $sql);
-  confirmResultSet($result);
-  $subject = mysqli_fetch_assoc($result);
-  mysqli_free_result($result);
-  return $subject;
+  $sql = "SELECT id_ven, vendor_name_ven, vendor_description_ven, stall_number_ven ";
+  $sql .= "FROM vendor_ven ";
+  $sql .= "WHERE id_ven = ?";
+  $stmt = mysqli_prepare($db, $sql);
+  mysqli_stmt_bind_param($stmt, "s", $vendorId);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+  $vendor = mysqli_fetch_assoc($result);
+  mysqli_stmt_close($stmt);
+  return $vendor;
 }
 
 function getCategories() {
@@ -106,9 +108,16 @@ function getProductsByCategory($categoryId) {
   mysqli_stmt_bind_param($stmt, "i", $categoryId);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-  $product = mysqli_fetch_assoc($result);
-  mysqli_stmt_close($stmt);
-  return $product;
+  if(!$result) {
+    return false;
+    echo "<p>No products found.</p>";
+  }
+  $products = array();
+  while ($row = mysqli_fetch_assoc($result))
+  $products[] = $row;
+
+  mysqli_free_result($result);
+  return $products;
 }
 
 function getVendorId($userId) {
@@ -144,5 +153,108 @@ function insertIntoProducts($productName, $categoryId) {
     }
     mysqli_stmt_close($stmt);
   }
+
+function updateVendor($vendorId) {
+  global $db;
+  $vendor = [];
+  $vendor['vendor_name_ven'] =$_POST['vendor_name_ven'] ?? '';
+  $vendor['vendor_description_ven'] =$_POST['vendor_description_ven'] ?? '';
+  $vendor['stall_number_ven'] =$_POST['stall_number_ven'] ?? '';
+
+  $sql = "UPDATE vendor_ven SET ";
+  $sql .= "vendor_name_ven=?, ";
+  $sql .= "vendor_description_ven=?, ";
+  $sql .= "stall_number_ven=? ";
+  $sql .= "WHERE id_ven=? ";
+  $sql .= "LIMIT 1";
+
+  $stmt = mysqli_prepare($db, $sql);
+  if (!$stmt) {
+    die("Error preparing statement: " . mysqli_error($db));
+  }
+
+  mysqli_stmt_bind_param($stmt, "sssi", $vendor['vendor_name_ven'], $vendor['vendor_description_ven'], $vendor['stall_number_ven'], $vendorId);
+
+  $result = mysqli_stmt_execute($stmt);
+  if (!$result) {
+    die("Error executing statement: " . mysqli_stmt_error($stmt));
+  }
+
+  if ($result) {
+    redirectTo(urlFor('/users/vendors/index.php?id=' . $vendorId));
+  } else {
+    echo mysqli_error($db);
+    dbDisconnect($db);
+    exit;
+  }
+}
+
+function getAllVendors() {
+  global $db;
+  $sql = "SELECT id_ven, vendor_name_ven, vendor_description_ven, stall_number_ven ";
+  $sql .= "FROM vendor_ven ";
+  $result = mysqli_query($db, $sql);
+  if(!$result) {
+    echo "Error: " . mysqli_error($db);
+    return false;
+  }
+  $vendors = array();
+  while ($row = mysqli_fetch_assoc($result))
+  $vendors[] = $row;
+
+  mysqli_free_result($result);
+  return $vendors;
+}
+
+function deleteProductFromVendor($id_prod, $id_ven) {
+  global $db;
+  $sql_select = "SELECT junction_id_vjunc ";
+  $sql_select .= "FROM vendor_junction_vjunc ";
+  $sql_select .= "WHERE id_prod_vjunc = ? AND id_ven_vjunc = ? ";
+
+  $stmt_select = mysqli_stmt_init($db);
+
+  if(!mysqli_stmt_prepare($stmt_select, $sql_select)) {
+    header("Location: index.php?error=selectStmtFailed");
+    exit();
+  }
+
+  mysqli_stmt_bind_param($stmt_select, "ss", $id_prod, $id_ven);
+  mysqli_stmt_execute($stmt_select);
+
+  if(mysqli_stmt_error($stmt_select)) {
+    header("Location: index.php?error=stmtSelectError");
+    exit();
+  }
+
+  $result = mysqli_stmt_get_result($stmt_select);
+  $row = mysqli_fetch_assoc($result);
+  $id_junc = $row['junction_id_vjunc'];
+
+  $sql = "DELETE FROM vendor_junction_vjunc ";
+  $sql .= "WHERE junction_id_vjunc = ?";
+  $stmt = mysqli_stmt_init($db);
+
+  if(!mysqli_stmt_prepare($stmt, $sql)) {
+    header("Location: index.php?error=stmtFailed");
+    exit();
+  }
+
+  mysqli_stmt_bind_param($stmt, "s", $id_junc);
+  mysqli_stmt_execute($stmt);
+
+  if(mysqli_stmt_error($stmt)) {
+    header("Location: index.php?error=stmtError");
+    exit();
+  }
+
+  $result = mysqli_stmt_get_result($stmt);
+  if($result == false) {
+    echo "Error: no result";
+  } else {
+    echo "Product deletion successful.";
+  }
+
+}
 
 ?>

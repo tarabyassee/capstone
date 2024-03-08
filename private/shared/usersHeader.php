@@ -1,7 +1,7 @@
 <?php
 session_start();
   if(!isset($pageTitle)) {$pageTitle = 'AAA';} 
-$pageTitle = 'Vendor'
+$pageTitle = 'User'
 ?>
 <!DOCTYPE html>
   <html lang="en">

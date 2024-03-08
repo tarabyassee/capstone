@@ -2,8 +2,8 @@
   require_once('../../../../private/initialize.php');
 
   if(isPostRequest()) {
-    $productName = $_POST['productName'] ?? '';
     $categoryId = $_POST['categoryId'] ?? '';
+    $productName = $_POST['productName'] ?? '';
 
     $product = insertIntoProducts($productName, $categoryId);
     echo "Product Added! <br>";

@@ -13,10 +13,6 @@
     $vendorInfo = getVendorInformation($vendorId);
     $products = findAllProductsByVendorId($vendorId);
   }
-  // if($vendorInfo !== null) {
-  //   $products = findAllProductsByVendorId($vendorId);
- // 
-  // }
   
   ?>
 
@@ -52,7 +48,7 @@
                   <td><?php echo $vendorInfo['vendor_name_ven']?></td>
                   <td><?php echo $vendorInfo['vendor_description_ven']?></td>
                   <td><?php echo $vendorInfo['stall_number_ven']?></td>
-                  <td><a class="action" href="<?php echo urlFor('/users/vendors/edit.php?id=' . h(u($vendorInfo['id_ven']))); ?>">Edit</a></td>
+                  <td><a class="action" href="<?php echo urlFor('/users/vendors/vendorEdit.php?id=' . h(u($vendorInfo['id_ven']))); ?>">Edit</a></td>
                 </tr>
               </table>
         <?php 
@@ -77,7 +73,7 @@
                   <td><?php echo $product['product_name_prod']?></td>
                   <td><?php echo $product['category_name_cat']?></td>
                   <td><a class="action" href="<?php echo urlFor('/users/vendors/products/show.php?id=' . h(u($product['id_prod']))); ?>">View</a></td>
-                  <td><a class="action" href="<?php echo urlFor('/users/vendors/products/delete.php?id=' . h(u($product['id_prod']))); ?>">Delete</a></td>
+                  <td><a class="action" href="<?php echo urlFor('/users/vendors/products/delete.php?id_prod=' . h(u($product['id_prod'])) . 'id_ven=' . h(u($vendorId))); ?>">Delete</a></td>
                 </tr>
           <?php 
               }

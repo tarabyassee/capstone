@@ -1,5 +1,12 @@
 <?php
   require_once('../../../../private/initialize.php');
+
+  session_start();
+  if (!isset($_SESSION['loggeduserid'])) {
+    header("Location: ../../login.php");
+    exit();
+  }
+
   $pageTitle = "Products";
   $ven_id = $_GET['id_ven'] ?? '1';
 

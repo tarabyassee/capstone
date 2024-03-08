@@ -34,5 +34,4 @@
         <input type="submit" value="Add product">
   </form>
 </div>
-  </body>
-</html>
+<?php include(SHARED_PATH . '/usersFooter.php'); ?>

@@ -9,7 +9,7 @@
       <section>
         <form id="user-login" action="../../private/processLogin.php" method="post">
           <label for="name">*Username</label>
-          <input type="text" id="name" name="username" placeholder="Username/Email...">
+          <input type="text" id="name" name="username" placeholder="Username/Email..." required>
 
           <label for="pwd">*Password</label>
           <input type="password" id="pwd" name="pwd" placeholder="Password..." required>
@@ -31,3 +31,4 @@
     </body>
   </div>
 </html>
+<?php require_once('../../private/shared/usersFooter.php'); ?>

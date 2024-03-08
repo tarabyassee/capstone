@@ -2,14 +2,16 @@
   $pageTitle = 'Home';
   require_once('../../private/initialize.php');
   require_once('../../private/shared/usersHeader.php');
+
+  
 ?>
   
-    <body>
+
       <h1>Sign Up</h1>
       <section>
         <form id="user-login" action="../../private/processSignup.php" method="post">
           <label for="fname">*First Name:</label>
-          <input type="text" name="fname" id="fname" required><br>
+          <input type="text" name="fname" id="fname" value="<?php echo $fname = isset($_SESSION['fname']) ? $_SESSION['fname'] : ''; ?>" required><br>
 
           <label for="lname">*Last Name:</label>
           <input type="text" name="lname" id="lname" required><br>
@@ -19,13 +21,13 @@
 
           <fieldset>
             <legend>Phone Type</legend>
-            <input type="radio" value="1" name="phonetype">
+            <input type="radio" value="1" id="1" name="phonetype">
             <label for="1">Cell Phone</label>
 
-            <input type="radio" value="2" name="phonetype">
+            <input type="radio" value="2" id="2" name="phonetype">
             <label for="2">Home Phone</label>
 
-            <input type="radio" value="3" name="phonetype">
+            <input type="radio" value="3" id="3" name="phonetype">
             <label for="3">Work Phone</label>
 
           </fieldset>
@@ -39,8 +41,8 @@
           <label for="pwd">*Password</label>
           <input type="password" id="pwd" name="pwd" required>
 
-          <label for="pwd">*Re-enter Password</label>
-          <input type="password" id="pwdrepeat" name="pwdrepeat" required>
+          <label for="repwd">*Re-enter Password</label>
+          <input type="password" id="repwd" name="pwdrepeat" required>
 
           
 
@@ -60,6 +62,5 @@
         }
       }
       ?>
-    </body>
-  </div>
-</html>
+
+<?php include_once('../../private/shared/usersFooter.php'); ?>

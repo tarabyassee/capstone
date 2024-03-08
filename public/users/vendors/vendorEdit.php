@@ -1,8 +1,21 @@
 <?php 
-  $vendorId = $_GET['id'];
   require_once('../../../private/initialize.php');
-  $pageTitle = 'Edit Vendor Information';
-  include(SHARED_PATH . '/users_header.php');
+  session_start();
+  if(!isset($_GET['id'])) {
+    redirectTo(urlFor('/users/vendors/index.php'));
+  }
+
+  $pageTitle = "Edit Vendor";
+
+  $vendorId = $_GET['id'];
+  
+  if(isPostRequest()) {
+    updateVendor($vendorId);
+  } else {
+    $vendor = getVendorInformation($vendorId);
+  }
+
+  include(SHARED_PATH . '/usersFooter.php');
 
 ?>
 
@@ -10,19 +23,27 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Document</title>
+    <title>Edit Vendor</title>
   </head>
   
   <body>
-    <div id="form-content">
-    <a class="back-link" href="<?php echo urlFor('/users/vendors/index.php'); ?>">&laquo; Back to Vendor Main Menu</a>
-    <form action="" method="post">
-      <input type="text" name="vendor-name" value="">
-      <label for="vendor-name"></label>
-      <input type="submit" value="Edit Vendor">
-    </form>
+    <div id="content">
+      <a class="backlink" href="<?php echo urlFor('/users/vendors/index.php');?>">&laquo; Back to List</a>
+
+      <h1>Edit Vendor</h1>
+      <h2>Vendor Name</h2>
+      <form action="<?php echo urlFor('/users/vendors/vendorEdit.php?id=' . h(u($vendorId))); ?>" method="post">
+        <label for="vendor_name_ven">Vendor Name</label>
+        <input type="text" name="vendor_name_ven" value="<?php echo h($vendor['vendor_name_ven']); ?>">
+
+        <label for="vendor_description_ven">Vendor Description</label>
+        <input type="textarea" name="vendor_description_ven" value="<?php echo h($vendor['vendor_description_ven']); ?>">
+
+        <label for="stall_number_ven">Stall Number</label>
+        <input type="text" name="stall_number_ven" value="<?php echo h($vendor['stall_number_ven']); ?>">
+
+        <input type="submit" value="Edit Vendor"/>
+      </form>
 
     </div>
-    
-  </body>
-</html>
+<?php   include(SHARED_PATH . '/usersFooter.php'); ?>
