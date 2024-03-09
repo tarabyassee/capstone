@@ -26,28 +26,49 @@ if (!isset($pageTitle)) {
     <header role="banner">
       <img id="logo" src="<?php echo urlFor('/images/avlTM100.png') ?>">
     </header>
-    <input type="checkbox" id="menu-checkbox">
     <nav role="navigation" class="items">
+      <input type="checkbox" id="menu-checkbox">
       <label for="menu-checkbox" id="menu-trigger">&#9776;</label>
-      <ul id="myLinks">
+      <div id="menus">
         <div id="userMenu">
-        <?php
-          if (isset($_SESSION["loggedusername"])) {
-            echo "<li><a href='" . urlFor('/users/profile.php') . "'>Profile</a></li>";
-            echo "<li><a href='" . urlFor('/users/processLogout.php') . "'>Logout</a></li>";
-          } else {
-            echo "<li><a href='" . urlFor('/users/login.php') . "'>Login</a></li>";
-            echo "<li><a href='" . urlFor('/users/signup.php') . "'>Sign Up</a></li>";
-          }
-          ?>
+          <ul>
+            <?php
+            if (isset($_SESSION["loggedusername"])) {
+              echo "<li><a href='" . urlFor('/users/profile.php') . "'>Profile</a></li>";
+              echo "<li><a href='" . urlFor('/users/processLogout.php') . "'>Logout</a></li>";
+            } else {
+              echo "<li><a href='" . urlFor('/users/login.php') . "'>Login</a></li>";
+              echo "<li><a href='" . urlFor('/users/signup.php') . "'>Sign Up</a></li>";
+            }
+            ?>
+          </ul>
         </div>
         <div id="menu">
-          <li><a href="">Home</a></li>
-          <li><a href="search.html">Search</a></li>
-          <li><a href="vendors.html">Vendors</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <ul>
+            <li><a href="<?php echo urlFor('index.php') ?>">Home</a></li>
+            <li><a href="<?php echo urlFor('search.php') ?>">Search</a></li>
+            <li><a href="<?php echo urlFor('vendors.php') ?>">Vendors</a></li>
+            <li><a href="<?php echo urlFor('contact.html') ?>">Contact</a></li>
+          </ul>
         </div>
-      </ul>
+      </div>
     </nav>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var menuCheckbox = document.getElementById('menu-checkbox');
+    var userMenu = document.getElementById('userMenu');
+    var menu = document.getElementById('menu');
+    menuCheckbox.addEventListener('change', function() {
+      if (menuCheckbox.checked) {
+        userMenu.style.display = 'block';
+        menu.style.display = 'block';
+      } else {
+        userMenu.style.display = 'none';
+        menu.style.display = 'none';
+      }
+    });
+  });
+
+</script>
 
   </div>

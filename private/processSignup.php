@@ -1,7 +1,7 @@
 <?php
   require_once('initialize.php');
   if(isset($_POST['submit'])) {
-    $fname = $_SESSION['fname'];
+    $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $phone = $_POST['phone'];
     $phonetype = $_POST['phonetype'];
@@ -9,9 +9,6 @@
     $username = $_POST['username'];
     $pwd = $_POST['pwd'];
     $pwdRepeat = $_POST['pwdrepeat'];
-
-    require_once 'initialize.php';
-    require_once 'validationFunctions.php';
 
     if (invalidUsername($username) !== false) {
       header("Location: ../public/users/signup.php?error=invalidUsername");

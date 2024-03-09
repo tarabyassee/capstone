@@ -91,3 +91,36 @@ th {
 td {
   text-align: center;
 }
+
+/**********footer**********/
+footer {
+  align-items: center;
+  border-bottom: 2px solid #333;
+  border-top: 2px solid #333;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+}
+
+footer div {
+  align-items: center;
+  flex: 1;
+}
+
+#footer-middle {
+  border-left: 2px solid #333;
+  border-right: 2px solid #333;
+  display: flex;
+  height: 80px;
+  text-align: center;
+
+}
+#footer-middle address {
+  flex: 1;
+}
+#footer-left,
+#footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
