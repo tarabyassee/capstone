@@ -1,7 +1,7 @@
 <?php
   require_once('../../private/initialize.php');
   require_once('../../private/shared/usersHeader.php');
-  require_once('../../private/processLogout.php');
+
 ?>
 
       <main>

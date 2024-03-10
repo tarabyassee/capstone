@@ -24,7 +24,7 @@ if (!isset($pageTitle)) {
 <body>
   <div id="wrapper">
     <header role="banner">
-      <img id="logo" src="<?php echo urlFor('/images/avlTM100.png') ?>">
+      <img id="logo" src="<?php echo urlFor('/images/avlTM100.png') ?>" alt="logo" width="161" height="177">
     </header>
     <nav role="navigation" class="items">
       <input type="checkbox" id="menu-checkbox">
@@ -34,8 +34,8 @@ if (!isset($pageTitle)) {
           <ul>
             <?php
             if (isset($_SESSION["loggedusername"])) {
-              echo "<li><a href='" . urlFor('/users/profile.php') . "'>Profile</a></li>";
-              echo "<li><a href='" . urlFor('/users/processLogout.php') . "'>Logout</a></li>";
+              echo "<li><a href='" . urlFor('/users/vendors/index.php') . "'>Profile</a></li>";
+              echo "<li><a href='" . urlFor('../private/processLogout.php') . "'>Logout</a></li>";
             } else {
               echo "<li><a href='" . urlFor('/users/login.php') . "'>Login</a></li>";
               echo "<li><a href='" . urlFor('/users/signup.php') . "'>Sign Up</a></li>";

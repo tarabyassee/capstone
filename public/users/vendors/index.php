@@ -4,14 +4,16 @@
   include(SHARED_PATH . '/usersHeader.php');
 
   if(isset($_SESSION["loggeduserid"])) {
-    echo "<p>Hello there, " . $_SESSION["loggedusername"] . "</p>";
+    echo "<h1>Hello there, " . $_SESSION["loggedusername"] . "</h1>";
     $userId = $_SESSION["loggeduserid"];
-    echo $userId;
+
     $vendorIdSet = getVendorId($userId);
     $vendorId = $vendorIdSet['id_ven'];
-    echo $vendorId;
+
     $vendorInfo = getVendorInformation($vendorId);
     $products = findAllProductsByVendorId($vendorId);
+  } else {
+    redirectTo(urlFor('/index.php'));
   }
   
   ?>
@@ -62,9 +64,10 @@
             <th>Product ID</th>
             <th>Name</th>
             <th>Category</th>
-            <th></th>
+            <th>View</th>
+            <th>Delete</th>
           </tr>
-          <a href="products/new.php">Add a new product</a>
+
           <?php 
             if(!empty($products)) { 
               foreach($products as $product) { ?>
@@ -75,6 +78,7 @@
                   <td><a class="action" href="<?php echo urlFor('/users/vendors/products/show.php?id=' . h(u($product['id_prod']))); ?>">View</a></td>
                   <td><a class="action" href="<?php echo urlFor('/users/vendors/products/delete.php?id_prod=' . h(u($product['id_prod'])) . 'id_ven=' . h(u($vendorId))); ?>">Delete</a></td>
                 </tr>
+
           <?php 
               }
             } else {
@@ -82,11 +86,7 @@
               } 
           ?>
         </table>
-        <ul>
-          <li><a href="<?php echo urlFor('/users/vendors/new.php') ?>">Add New Products</li>
-          <li><a href="<?php echo urlFor('/users/vendors/edit.php?id=' . h(u($product['id_prod']))); ?>">Edit Products</li>
-          <li><a href="<?php echo urlFor('/users/vendors/show.php?id=' . h(u($product['id_prod']))); ?>">Edit Vendor Information</li>
-        </ul>
+        
       </div>
     </div>
 

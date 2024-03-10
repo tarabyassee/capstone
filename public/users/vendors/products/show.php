@@ -38,3 +38,5 @@
 
   </body>
 </html>
+  
+<?php include(SHARED_PATH . '/usersFooter.php'); ?>

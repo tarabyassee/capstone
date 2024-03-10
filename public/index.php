@@ -15,10 +15,11 @@
           <p>Downtown Asheville</p>
         </div>
       </div>
+      <div id="fav-market">
+        <p>Western North Carolina's Favorite Market</p>
+        <h2>Asheville Tailgate Market</h2>
+        <p>Since 1988 the Asheville Tailgate Market has been a leader in connecting local people and products.</p>
+      </div>
     </main>
 
-  </div>
-
-      <h1></h1>
-
-
+<?php require_once('../private/shared/publicFooter.php'); ?>

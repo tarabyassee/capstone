@@ -1,6 +1,8 @@
 <?php 
   require_once('../../../private/initialize.php');
-  session_start();
+
+  include(SHARED_PATH . '/usersHeader.php');
+
   if(!isset($_GET['id'])) {
     redirectTo(urlFor('/users/vendors/index.php'));
   }
@@ -14,9 +16,6 @@
   } else {
     $vendor = getVendorInformation($vendorId);
   }
-
-  include(SHARED_PATH . '/usersFooter.php');
-
 ?>
 
 <!DOCTYPE html>

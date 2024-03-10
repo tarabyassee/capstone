@@ -4,15 +4,16 @@
   require_once('../../private/shared/usersHeader.php');
 ?>
   
-    <body>
+    <body id="login">
       <h1>Log In</h1>
+      <p>Fields marked with an * are required.</p>
       <section>
-        <form id="user-login" action="../../private/processLogin.php" method="post">
-          <label for="name">*Username</label>
-          <input type="text" id="name" name="username" placeholder="Username/Email..." required>
+        <form id="user-login" action="../../private/processLogin.php" method="post" role="form">
+          <label for="name">*Username:</label>
+          <input type="text" id="name" name="username" placeholder="Username/Email..." required><br>
 
-          <label for="pwd">*Password</label>
-          <input type="password" id="pwd" name="pwd" placeholder="Password..." required>
+          <label for="pwd">*Password:</label>
+          <input type="password" id="pwd" name="pwd" placeholder="Password..." required><br>
 
           <button type="submit" name="submit">Log in</button>
         </form>

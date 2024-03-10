@@ -6,21 +6,21 @@ $pageTitle = 'Admin Menu';
 require_once('../../../private/shared/usersHeader.php'); 
 ?>
     <div id="content">
-      <h2>Admin Login</h2>
+      <h1>Admin Page</h1>
     </div>
     <?php 
 
   if(isset($_SESSION["loggeduserid"])) {
-    echo "<p>Hello there, " . $_SESSION["loggedusername"] . "</p>";
+    echo "<h2>Hello there, " . $_SESSION["loggedusername"] . "</h2>";
     $userId = $_SESSION["loggeduserid"];
     $vendors = getAllVendors();
   } else {
-    redirectTo(urlFor('../../index.php'));
+    redirectTo(urlFor('../public/index.php'));
   }
   ?>
   
   <body>
-    <div id="content">
+    <div id="admin-content">
       <div id="menu">
         <?php 
             if($vendors) { ?> 
@@ -29,18 +29,15 @@ require_once('../../../private/shared/usersHeader.php');
                 <tr>
                   <th>Vendor ID</th>
                   <th>Name</th>
-                  <th>Description</th>
-                  <th>Stall Number</th>
+                  <th>View</th>
                   <th>Edit</th>
-                  <th>&nbsp</th>
+                  <th>Delete</th>
                 </tr>
 
                 <?php foreach ($vendors as $vendor) { ?>
                   <tr>
                     <td><?php echo $vendor['id_ven']?></td>
                     <td><?php echo $vendor['vendor_name_ven']?></td>
-                    <td><?php echo $vendor['vendor_description_ven']?></td>
-                    <td><?php echo $vendor['stall_number_ven']?></td>
                     <td><a class="action" href="<?php echo urlFor('/users/admins/viewVendor.php?id=' . h(u($vendor['id_ven']))); ?>">View</a></td>
                     <td><a class="action" href="<?php echo urlFor('/users/admins/editVendor.php?id=' . h(u($vendor['id_ven']))); ?>">Edit</a></td>
                     <td><a class="action" href="<?php echo urlFor('/users/admins/deleteVendor.php?id=' . h(u($vendor['id_ven']))); ?>">Delete</a></td>

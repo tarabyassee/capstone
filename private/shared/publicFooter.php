@@ -1,4 +1,4 @@
-<footer>
+<footer role="contentinfo">
         <div id="footer-left">
           <p>Tara Byassee</p>
           <p>atm@gmail.com</p>
@@ -11,7 +11,7 @@
           <p>9AM - 1PM</p>
         </div>
       </footer>
-    </div>
+
   </body>
 </html>
 <?php

@@ -52,10 +52,17 @@ header {
 
 h1 {
   color: var(--darkOlive);
+  margin-left: 1rem;
 }
+
+#signup-content p:first-of-type {
+  margin-left: 1rem;
+}
+
 
 /********** Nav Bar - large screen **********/
 #menus {
+  border-bottom: 1px solid var(--darkOlive);
   display: flex;
   flex-direction: row;
   font-family: 'Julius Sans One';
@@ -96,17 +103,16 @@ h1 {
 /********** end of nav **********/
 
 button[type='submit'] {
-  
   background-color: var(--lightYellow);
   border-radius: 15px;
   display: block;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin: 0 auto;
   padding: 1rem;
 }
 
 
-/**********home page **********/
+/*************************** HOME page **********/
 #info-container {
   display: flex;
   flex-direction: row;
@@ -118,6 +124,7 @@ button[type='submit'] {
   flex: 1;
   flex-direction: column;
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 #when {
@@ -141,7 +148,7 @@ table {
 }
 
 th {
-  background-color: greenyellow;
+  background-color: var(--salmon);
   white-space: nowrap;
 }
 
@@ -149,10 +156,10 @@ td {
   text-align: center;
 }
 
-/**********form**********/
 form {
   margin-top: 1rem;
 }
+/********** signup page **********/
 
 #signup label {
   display: inline-block;
@@ -167,7 +174,7 @@ form {
   padding: .25rem;
 }
 
-fieldset {
+#signup fieldset {
   margin-left: 8rem;
   margin-bottom: 1rem;
   width: 60%;
@@ -211,6 +218,28 @@ footer div {
   flex-direction: column;
   justify-content: center;
 }
+/********** main index page **********/
+#fav-market {
+  background-color: var(--lightYellow);
+  box-shadow: 0 0 5px #000;
+  margin: 0 auto;
+  width: 90%;
+}
+
+#fav-market h2,
+#fav-market p {
+  text-align: center;
+}
+
+#fav-market p:first-child {
+  padding: .25rem;
+  text-decoration: overline underline;
+}
+
+#fav-market p:last-child {
+  font-size: .9rem;
+  padding-bottom: 1rem;
+}
 
 /********** media queries **********/
 @media screen and (max-width: 870px) {
@@ -240,12 +269,10 @@ footer div {
   #userMenu li:hover,
   #menu li:hover {
     background-color: #333;
-
   }
 
   #userMenu a:hover,
   #menu a:hover {
-
     color: #fff;
   }
 

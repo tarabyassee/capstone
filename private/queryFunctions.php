@@ -13,11 +13,9 @@ function findProductsById($id) {
 
   $sql = "SELECT * FROM product_prod ";
   $sql .= "WHERE id_prod ='" . dbEscape($db, $id) . "'";
-  echo $sql;
   $result = mysqli_query($db, $sql);
   confirmResultSet($result);
   $product = mysqli_fetch_assoc($result);
-  var_dump($product);
   mysqli_free_result($result);
   return $product;
 }
@@ -208,7 +206,7 @@ function getAllVendors() {
 
 function deleteProductFromVendor($id_prod, $id_ven) {
   global $db;
-  $sql_select = "SELECT junction_id_vjunc ";
+  $sql_select = "SELECT id_vjunc ";
   $sql_select .= "FROM vendor_junction_vjunc ";
   $sql_select .= "WHERE id_prod_vjunc = ? AND id_ven_vjunc = ? ";
 
@@ -229,10 +227,10 @@ function deleteProductFromVendor($id_prod, $id_ven) {
 
   $result = mysqli_stmt_get_result($stmt_select);
   $row = mysqli_fetch_assoc($result);
-  $id_junc = $row['junction_id_vjunc'];
+  $id_junc = $row['id_vjunc'];
 
   $sql = "DELETE FROM vendor_junction_vjunc ";
-  $sql .= "WHERE junction_id_vjunc = ?";
+  $sql .= "WHERE id_vjunc = ?";
   $stmt = mysqli_stmt_init($db);
 
   if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -256,5 +254,26 @@ function deleteProductFromVendor($id_prod, $id_ven) {
   }
 
 }
+
+function addProductToVendor($id_prod, $id_ven) {
+  global $db;
+  $sql = "INSERT INTO vendor_junction_vjunc (id_ven_vjunc, id_ven_prod) ";
+  $sql .= "VALUES (?, ?)";
+
+  $stmt = mysqli_stmt_init($db);
+
+  if (!mysqli_stmt_prepare($stmt, $sql)) {
+    header("Location: ../public/users/vendors/products/new.php?error=stmtFailed");
+    exit();
+  }
+
+  mysqli_stmt_bind_param($stmt, "ii", $id_ven, $id_prod);
+
+  mysqli_stmt_execute($stmt);
+  mysqli_stmt_close($stmt);
+
+  header("Location: ../public/users/vendors/products/new.php?error=none");
+}
+
 
 ?>

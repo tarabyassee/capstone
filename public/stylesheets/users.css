@@ -51,7 +51,12 @@ header {
 }
 
 h1 {
-  color: red;
+  color: var(--darkOlive);
+  padding-left: 2rem;
+}
+
+h2 {
+  padding-left: 2rem;
 }
 
 /********** Nav Bar - large screen **********/
@@ -79,17 +84,26 @@ table {
   border-collapse: collapse;
   margin: 2rem;
   padding: .5rem;
-  table-layout: fixed;
-  width: 80%;
+  width: 90%;
 }
 
 th {
-  background-color: greenyellow;
+  background-color: var(--salmon);
   white-space: nowrap;
 }
 
 td {
   text-align: center;
+  white-space: nowrap;
+}
+
+button[type='submit'] {
+  background-color: var(--lightYellow);
+  border-radius: 15px;
+  display: block;
+  font-size: 1.25rem;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
 /**********footer**********/
@@ -124,3 +138,19 @@ footer div {
   flex-direction: column;
   justify-content: center;
 }
+/********** login **********/
+#login p:first-of-type{
+  padding-left: 1rem;
+}
+
+#user-login label {
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+}
+
+#user-login input,
+#user-login label {
+  margin-bottom: .2rem;
+}
+
+/********** vendor index (profile) **********/
