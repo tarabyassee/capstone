@@ -18,6 +18,7 @@ if (!isset($pageTitle)) {
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/0a06179f50.js" crossorigin="anonymous"></script>
+  <script src="<?php echo urlFor('js/script.js')?>"></script>
 
 </head>
 
@@ -70,5 +71,3 @@ if (!isset($pageTitle)) {
   });
 
 </script>
-
-  </div>

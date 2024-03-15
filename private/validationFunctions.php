@@ -72,31 +72,6 @@
     return strpos($value, $required_string) !== false;
   }
 
-  // has_valid_email_format('nobody@nowhere.com')
-  // * validate correct format for email addresses
-  // * format: [chars]@[chars].[2+ letters]
-  // * preg_match is helpful, uses a regular expression
-  //    returns 1 for a match, 0 for no match
-  //    http://php.net/manual/en/function.preg-match.php
-  function has_valid_email_format($value) {
-    $email_regex = '/\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\Z/i';
-    return preg_match($email_regex, $value) === 1;
-  }
-
-  // has_unique_username('johnqpublic')
-  // * Validates uniqueness of admins.username
-  // * For new records, provide only the username.
-  // * For existing records, provide current ID as second argument
-  //   has_unique_username('johnqpublic', 4)
-  function has_unique_username($username, $current_id="0") {
-    $user = User::find_by_username($username);
-    if($user === false || $user->id == $current_id){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 /************Functions I added *********/
 
 function invalidUsername($username) {
@@ -141,15 +116,14 @@ function usernameExists($db, $username, $email) {
 
   $resultData = mysqli_stmt_get_result($stmt);
 
-  if($row = mysqli_fetch_assoc($resultData)) {
-    return $row;
+  if(mysqli_fetch_assoc($resultData)) {
+    mysqli_stmt_close($stmt);
+    return true; 
   } else {
-    $result = false;
-    return $result;
+    mysqli_stmt_close($stmt);
+    return false; 
   }
-  mysqli_stmt_close($stmt);
 }
-
 
 function createUser($db, $fname, $lname, $phone, $phonetype, $email, $username, $pwd) {
   $sql_select = "SELECT id_phn FROM phone_type_phn WHERE type_phn = ? ";
@@ -186,7 +160,7 @@ function createUser($db, $fname, $lname, $phone, $phonetype, $email, $username, 
   mysqli_stmt_execute($stmt);
   mysqli_stmt_close($stmt);
 
-  header("Location: ../public/users/signup.php?error=none");
+  return 'none';
 }
 
 function emptyInputLogin($username, $pwd) {

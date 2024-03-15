@@ -3,7 +3,19 @@ require_once('../../../private/initialize.php');
 
 $pageTitle = 'Admin Menu';
 
-require_once('../../../private/shared/usersHeader.php'); 
+require_once('../../../private/shared/usersHeader.php');
+if(isset($_SESSION["loggeduserid"])) {
+  echo "<h1>Hello there, " . $_SESSION["loggedusername"] . "</h1>";
+  $userId = $_SESSION["loggeduserid"];
+
+  $vendorIdSet = getVendorId($userId);
+  $vendorId = $vendorIdSet['id_ven'];
+
+  $vendorInfo = getVendorInformation($vendorId);
+  $products = findAllProductsByVendorId($vendorId);
+} else {
+  redirectTo(urlFor('/index.php'));
+} 
 ?>
     <div id="content">
       <h1>Admin Page</h1>

@@ -27,7 +27,7 @@ session_start();
           <?php
             if (isset($_SESSION["loggedusername"])) {
               echo "<li><a href='" . urlFor('/users/vendors/index.php') . "'>Profile</a></li>";
-              echo "<li><a href='" . urlFor('../private/processLogout.php') . "'>Logout</a></li>";
+              echo "<li><a href='" . urlFor('../private/processLogout.php') . "'>Logout, " . $_SESSION["loggedusername"] . "</a></li>";
               echo "<li><a href='" . urlFor('/index.php') . "'>Main Home Page</a></li>";
             }
             ?>

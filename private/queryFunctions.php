@@ -98,22 +98,16 @@ function getCategories() {
 
 function getProductsByCategory($categoryId) {
   global $db;
-
-  $sql = "SELECT p.product_name_prod ";
-  $sql .= "FROM product_prod p ";
+  $sql = "SELECT product_name_prod ";
+  $sql .= "FROM product_prod ";
   $sql .= "WHERE id_cat_prod = ?";
   $stmt = mysqli_prepare($db, $sql);
   mysqli_stmt_bind_param($stmt, "i", $categoryId);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
-  if(!$result) {
-    return false;
-    echo "<p>No products found.</p>";
-  }
   $products = array();
   while ($row = mysqli_fetch_assoc($result))
   $products[] = $row;
-
   mysqli_free_result($result);
   return $products;
 }
@@ -274,6 +268,5 @@ function addProductToVendor($id_prod, $id_ven) {
 
   header("Location: ../public/users/vendors/products/new.php?error=none");
 }
-
 
 ?>

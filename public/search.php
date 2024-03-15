@@ -6,7 +6,29 @@ include(SHARED_PATH . '/publicHeader.php');
 ?>
 
 <main id="vendors-main" role="main">
-<h1>This will be a search page that will be searchable by "vendor" or by "product". It will be dynamically loaded.</h1>
+  <label for="searchCategories"></label>
+  <select id="searchCategories">
+    <option value="1">Animal Products</option>
+    <option value="2">Produce</option>
+    <option value="3">Plant Starts</option>
+    <option value="4">Specialty Food Items</option>
+    <option value="5">Non-Food Items</option>
+  </select>
+
+  <div id="searchResultTable">
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Vendor Name</th>
+        </tr>
+      </thead>
+      <tbody id="results">
+
+      </tbody>
+ 
+    </table>
+  </div>
 </main>
 
 <?php include(SHARED_PATH . '/publicFooter.php') ?>

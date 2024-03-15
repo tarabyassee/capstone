@@ -1,5 +1,6 @@
 <?php
   require_once('initialize.php');
+
   if(isset($_POST['submit'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
@@ -10,27 +11,34 @@
     $pwd = $_POST['pwd'];
     $pwdRepeat = $_POST['pwdrepeat'];
 
-    if (invalidUsername($username) !== false) {
-      header("Location: ../public/users/signup.php?error=invalidUsername");
-      exit();
+    $errors = [];
+
+    if (empty($fname) || empty($lname) || empty($phone) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat)) {
+      $errors[] = "All fields are required";
     }
 
-    if (invalidEmail($email) !== false) {
-      header("Location: ../public/users/signup.php?error=invalidEmail");
-      exit();
+    if (invalidUsername($username)) {
+      $errors[] = "Invalid username";
     }
 
-    if (pwdMatch($pwd, $pwdRepeat) !== false) {
-      header("Location: ../public/users/signup.php?error=nomatch");
-      exit();
-    }
-    if (usernameExists($db, $username, $email) !== false) {
-      header("Location: ../public/users/signup.php?error=usernameTaken");
-      exit();
+    if (invalidEmail($email)) {
+      $errors[] = "Invalid email";
     }
 
-    createUser($db, $fname, $lname, $phone, $phonetype, $email, $username, $pwd, $pwdRepeat);
+    if (pwdMatch($pwd, $pwdRepeat)) {
+      $errors[] = "Passwords don't match.";
+    }
 
+    if (usernameExists($db, $username, $email)) {
+      $errors[] = "Username is taken. Choose another.";
+    }
+
+    if (!empty($errors)) {
+      $errorMessage = implode(",", $errors);
+      header("Location: ../public/users/signup.php?error=$errorMessage");
+    } else {
+      createUser($db, $fname, $lname, $phone, $phonetype, $email, $username, $pwd, $pwdRepeat);
+    }
 
   } else {
     header("Location: ../public/index.php");
