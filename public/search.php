@@ -10,7 +10,8 @@ include(SHARED_PATH . '/publicHeader.php');
   <label for="searchInput">Search for a Product:</label>
   <input type="text" id="searchInput" placeholder="Enter a product name">
 
-  <div id="suggestions"></div>
+  <div id="suggestion"></div>
+  <div id="searchVendors"></div>
 
 </main>
 

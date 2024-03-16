@@ -288,4 +288,26 @@ function getProductSuggestions($searchTerm) {
   return $suggestions;
 }
 
+function getVendorsByProduct($productName) {
+  global $db;
+  $sql = "SELECT vendor_name_ven ";
+  $sql .= "FROM vendor_ven v ";
+  $sql .= "JOIN vendor_junction_vjunc vj ON v.id_ven = vj.id_ven_vjunc ";
+  $sql .= "JOIN product_prod p ON vj.id_prod_vjunc = p.id_prod ";
+  $sql .= "WHERE p.product_name_prod = ? ";
+
+  $stmt = mysqli_prepare($db, $sql);
+  $param = "$productName";
+  mysqli_stmt_bind_param($stmt, "s", $param);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+
+  $vendors = array();
+  while($row = mysqli_fetch_assoc($result)) {
+    $vendors[] = $row;
+  }
+  mysqli_stmt_close($stmt);
+  return $vendors;
+}
+
 ?>
