@@ -1,40 +1,52 @@
 'use strict';
 
-document.addEventListener("DOMContentLoaded", function(){
-  document.getElementById("searchCategories").addEventListener('change', async function() {
-    var categoryId = this.value;
+document.addEventListener("DOMContentLoaded", function() {
+  var searchProductsInput = document.getElementById("searchInput");
+  var suggestionsContainer = document.getElementById("suggestions");
+  var minLength = 3;
+
+  searchProductsInput.addEventListener('input', async function() {
+    var searchTerm = this.value.trim();
+    if (searchTerm.length < minLength) {
+      clearSuggestions();
+      return;
+    }
+    if (!/^[a-zA-Z]+$/.test(searchTerm)) {
+      console.error('search term must contain only letters');
+      return;
+    }
     try {
-      var products = await fetchProducts(categoryId);
-      displayProducts(products);
-    } catch (error) {
-      console.error('Error fetching products:', error);
+      var suggestions = await fetchProductSuggestions(searchTerm);
+      displaySuggestions(suggestions);
+    } catch(error) {
+      console.error('error fetching product suggestions', error);
     }
   });
 
-  async function fetchProducts(categoryId) {
-    var url = "http://localhost/ashevilleTailgateMarket/private/fetchProducts.php";
-    var response = await fetch(`${url}?categoryId=${encodeURIComponent(categoryId)}`)
-    if (!response.ok) {
-      throw new Error('Failed to fetch products');
-    }
-    return await response.json();
-  };
+async function fetchProductSuggestions(searchTerm) {
+  var url = "http://localhost/ashevilleTailgateMarket/private/fetchSearchTerm.php";
+  var response = await fetch(`${url}?searchTerm=${encodeURIComponent(searchTerm)}`)
+  if (!response.ok) {
+    throw new Error('Failed to fetch product suggestions');
+  }
+  return await response.json();
+}
 
-  function displayProducts(products) {
-    var resultsTable = document.getElementById("results");
-    resultsTable.innerHTML = '';
+function displaySuggestions(suggestions) {
+  suggestionsContainer.innerHTML = "";
 
-    products.forEach(function(product) {
-      var row = document.createElement("tr");
-      var productNameCell = document.createElement("td");
-
-      productNameCell.textContent = product.product_name_prod;
-
-      row.appendChild(productNameCell);
-
-      resultsTable.appendChild(row);
-    })
-
+  suggestions.forEach(function(suggestion) {
+      var suggestionElement = document.createElement("div");
+      suggestionElement.textContent = suggestion.product_name_prod;
+      suggestionElement.addEventListener('click', function() {
+      searchProductsInput.value = suggestion.product_name_prod;
+      clearSuggestions();
+      });
+      suggestionsContainer.appendChild(suggestionElement);
+    });
   }
 
+  function clearSuggestions() {
+    suggestionsContainer.innerHTML = "";
+  }
 })

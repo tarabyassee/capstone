@@ -269,4 +269,23 @@ function addProductToVendor($id_prod, $id_ven) {
   header("Location: ../public/users/vendors/products/new.php?error=none");
 }
 
+function getProductSuggestions($searchTerm) {
+  global $db;
+  $sql = "SELECT product_name_prod ";
+  $sql .= "FROM product_prod ";
+  $sql .= "WHERE product_name_prod LIKE ?";
+  $stmt = mysqli_prepare($db, $sql);
+  $param = "%{$searchTerm}%";
+  mysqli_stmt_bind_param($stmt, "s", $param);
+  mysqli_stmt_execute($stmt);
+  $result = mysqli_stmt_get_result($stmt);
+
+  $suggestions = array();
+  while($row = mysqli_fetch_assoc($result)) {
+    $suggestions[] = $row;
+  }
+  mysqli_stmt_close($stmt);
+  return $suggestions;
+}
+
 ?>
