@@ -290,15 +290,16 @@ function getProductSuggestions($searchTerm) {
 
 function getVendorsByProduct($productName) {
   global $db;
-  $sql = "SELECT vendor_name_ven ";
-  $sql .= "FROM vendor_ven v ";
-  $sql .= "JOIN vendor_junction_vjunc vj ON v.id_ven = vj.id_ven_vjunc ";
-  $sql .= "JOIN product_prod p ON vj.id_prod_vjunc = p.id_prod ";
-  $sql .= "WHERE p.product_name_prod = ? ";
+  $sql = "SELECT ven.vendor_name_ven ";
+  $sql .= "FROM vendor_ven AS ven ";
+  $sql .= "JOIN vendor_junction_vjunc AS vj ON ven.id_ven = vj.id_ven_vjunc ";
+  $sql .= "JOIN product_prod AS p ON vj.id_prod_vjunc = p.id_prod ";
+  $sql .= "WHERE p.product_name_prod = ?";
 
   $stmt = mysqli_prepare($db, $sql);
-  $param = "$productName";
-  mysqli_stmt_bind_param($stmt, "s", $param);
+  $stmt = mysqli_prepare($db, $sql);
+
+  mysqli_stmt_bind_param($stmt, "s", $productName);
   mysqli_stmt_execute($stmt);
   $result = mysqli_stmt_get_result($stmt);
 

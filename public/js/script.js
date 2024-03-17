@@ -4,11 +4,15 @@ document.addEventListener("DOMContentLoaded", function() {
   var searchProductsInput = document.getElementById("searchInput");
   var suggestionContainer = document.getElementById("suggestion");
   var minLength = 3;
+  var searchForm = document.getElementById("searchForm");
+  var searchVendors = document.getElementById("searchVendors");
 
   searchProductsInput.addEventListener('input', handleInput);
   suggestionContainer.addEventListener('click', handleSuggestionClick);
+  searchForm.addEventListener('submit', handleSubmit);
 
   async function handleInput() {
+    console.log('handleinput triggered');
     var searchTerm = this.value.trim();
     if (searchTerm.length < minLength) {
       clearSuggestions();
@@ -25,21 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
       console.error('error fetching product suggestions', error);
     }
   }
-
-  async function handleSuggestionClick(event) {
-    var suggestion = event.target;
-    if(!suggestionContainer.contains(suggestion)) return;
-    searchProductsInput.value = suggestion.textContent;
-    clearSuggestions();
-    
-    try {
-      var vendors = await fetchVendorsByProductName(suggestion.textContent);
-      console.log(vendors);
-    } catch (error) {
-      console.error('error fetching vendors', error)
-    }
-  }
-
+  
   async function fetchProductSuggestions(searchTerm) {
     var url = "http://localhost/ashevilleTailgateMarket/private/fetchSearchTerm.php";
     var response = await fetch(`${url}?searchTerm=${encodeURIComponent(searchTerm)}`)
@@ -48,20 +38,52 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     return await response.json();
   }
-  async function fetchVendorsByProductName(productName) {
+
+  async function handleSuggestionClick(event) {
+    event.preventDefault();
+    var suggestion = event.target;
+    if(!suggestionContainer.contains(suggestion)) return;
+    searchProductsInput.value = suggestion.textContent;
+    clearSuggestions();
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    var productName = document.getElementById("searchInput").value.trim();
+    if (productName.length === 0) {
+      console.error('Product name cannot be empty');
+      return;
+    }
+    fetchVendors(productName);
+  }
+
+  async function fetchVendors(productName) {
+    console.log('fetch vendors called with product name');
+    var url = "http://localhost/ashevilleTailgateMarket/private/fetchVendors.php";
+    var fullUrl = `${url}?productName=${encodeURIComponent(productName)}`;
+
     try {
-    var url = "http://localhost/ashevilleTailgateMarket/private/fetch.php";
-    var response = await fetch(`${url}?productName=${encodeURIComponent(productName)}`);
-    if (!response.ok) {
-        throw new Error('Failed to fetch vendors');
+      var response = await fetch(fullUrl);
+      if (!response.ok) {
+        throw new Error('failed to fetch vendors');
       }
-      return await response.json();
+      var vendors = await response.json();
+      displayVendors(vendors);
     } catch(error) {
-      throw new Error('error fetching vendors: '+ error.message);
+      console.error('error fetching vendors (this is the catch)', error);
     }
   }
 
+  function displayVendors(vendors) {
+    searchVendors.innerHTML="";
+    vendors.forEach(function(vendor) {
+      var vendorDiv = document.createElement("div");
+      vendorDiv.textContent = vendor.vendor_name_ven;
+      searchVendors.appendChild(vendorDiv);
+    });
+  }
 
+  
   function displaySuggestions(suggestions) {
     suggestionContainer.innerHTML = "";
     
