@@ -105,7 +105,7 @@ function pwdMatch($pwd, $pwdRepeat) {
 }
 
 function usernameExists($db, $username, $email) {
-  $sql = "SELECT * FROM user_usr WHERE username_usr = ? OR email_usr = ?;";
+  $sql = "SELECT * FROM user_usr WHERE username_usr = ? OR email_usr = ? ;";
   $stmt = mysqli_stmt_init($db);
   if (!mysqli_stmt_prepare($stmt, $sql)) {
     header("Location: ../public/users/signup.php?error=stmtFailed");
@@ -116,13 +116,13 @@ function usernameExists($db, $username, $email) {
 
   $resultData = mysqli_stmt_get_result($stmt);
 
-  if(mysqli_fetch_assoc($resultData)) {
-    mysqli_stmt_close($stmt);
-    return true; 
+  if($row = mysqli_fetch_assoc($resultData)) {
+    return $row;
   } else {
-    mysqli_stmt_close($stmt);
-    return false; 
+    $result = false;
+    return $result;
   }
+  mysqli_stmt_close($stmt);
 }
 
 function createUser($db, $fname, $lname, $phone, $phonetype, $email, $username, $pwd) {
@@ -174,7 +174,7 @@ function emptyInputLogin($username, $pwd) {
 
 function loginUser($db, $username, $pwd) {
   $usernameExists = usernameExists($db, $username, $username);
-  var_dump($usernameExists);
+
   if ($usernameExists === false) {
     header("Location: ..login.php?error=wronglogin");
     exit();

@@ -8,6 +8,6 @@ if(isset($_POST["submit"])) {
 
   loginUser($db, $username, $pwd);
   } 
-else {
-    redirectTo(urlFor('login.php'));
-  }
+// else {
+//     redirectTo(urlFor('login.php'));
+//   }
