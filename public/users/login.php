@@ -23,7 +23,7 @@
               echo "<p>Passwords don't match</p>";
             }
             else if($_GET["error"] == "wronglogin") {
-              echo "<p>Incorrect login information</p>";
+              echo "<p>Incorrect login information now</p>";
             }
           }
         ?>

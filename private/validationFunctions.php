@@ -174,9 +174,10 @@ function emptyInputLogin($username, $pwd) {
 
 function loginUser($db, $username, $pwd) {
   $usernameExists = usernameExists($db, $username, $username);
-
+  var_dump($usernameExists);
   if ($usernameExists === false) {
     header("Location: ..login.php?error=wronglogin");
+    exit();
   }
   $pwdHashed = $usernameExists['password_hashed_usr'];
   $checkPwd = password_verify($pwd, $pwdHashed);
