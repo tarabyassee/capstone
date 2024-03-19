@@ -13,7 +13,7 @@
 
     $errors = [];
 
-    if (empty($fname) || empty($lname) || empty($phone) || empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat)) {
+    if (empty($fname) || empty($lname) || empty($phone) || empty($phonetype) ||empty($email) || empty($username) || empty($pwd) || empty($pwdRepeat)) {
       $errors[] = "All fields are required";
     }
 

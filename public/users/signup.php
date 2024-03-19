@@ -61,17 +61,17 @@ if (isset($_POST['submit'])) {
             <label for="lname">*Last Name:</label>
             <input type="text" name="lname" id="lname" value="<?php echo h($lname); ?>"><br>
             <label for="phone">*Phone:</label>
-            <input type="tel" name="phone" id="phone"><br>
+            <input type="tel" name="phone" id="phone" value="<?php echo h($phone); ?>"><br>
 
             <fieldset>
                 <legend>Phone Type</legend>
-                <input type="radio" value="1" id="1" name="phonetype" <?php if ($phonetype == '1') echo 'checked'; ?>>
+                <input type="radio" value="1" id="1" name="phonetype">
                 <label for="1">Cell Phone</label>
 
-                <input type="radio" value="2" id="2" name="phonetype" <?php if ($phonetype == '2') echo 'checked'; ?>>
+                <input type="radio" value="2" id="2" name="phonetype">
                 <label for="2">Home Phone</label>
 
-                <input type="radio" value="3" id="3" name="phonetype" <?php if ($phonetype == '3') echo 'checked'; ?>>
+                <input type="radio" value="3" id="3" name="phonetype">
                 <label for="3">Work Phone</label>
             </fieldset>
 
