@@ -98,7 +98,7 @@ function getCategories() {
 
 function getProductsByCategory($categoryId) {
   global $db;
-  $sql = "SELECT product_name_prod ";
+  $sql = "SELECT product_name_prod, id_prod ";
   $sql .= "FROM product_prod ";
   $sql .= "WHERE id_cat_prod = ?";
   $stmt = mysqli_prepare($db, $sql);
