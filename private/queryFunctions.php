@@ -311,4 +311,8 @@ function getVendorsByProduct($productName) {
   return $vendors;
 }
 
+function addNewProduct($productName) {
+  
+}
+
 ?>

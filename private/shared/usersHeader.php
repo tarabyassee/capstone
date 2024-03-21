@@ -20,7 +20,7 @@ session_start();
   <body>
     <div id="wrapper">
       <header role="banner">
-        <img id="logo" src="<?php echo urlFor('/images/avlTmLogo160.png') ?>">
+        <img id="logo" alt="logo" src="<?php echo urlFor('/images/avlTmLogo160.png') ?>">
       </header>
       <nav role="navigation" id="usersNavigation">
         <ul id="userMenuLoggedIn">

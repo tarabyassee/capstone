@@ -106,6 +106,8 @@ button[type='submit'] {
   padding: 1rem;
 }
 
+
+
 /**********footer**********/
 footer {
   align-items: center;
@@ -154,3 +156,36 @@ footer div {
 }
 
 /********** vendor index (profile) **********/
+#vendorCard,
+#productCard {
+  width: 80%; 
+  padding: 20px;
+  border: 1px solid var(--darkOlive);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px var(--lightBlue);
+  background-color: #fff;
+  margin: 20px;
+}
+
+#products {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#vendorCard h3,
+#productCard h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#vendorCard p,
+#productCard p {
+  font-size: 16px;
+  color: #666;
+}
+
+#products div {
+  margin-left: auto;
+}

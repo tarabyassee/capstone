@@ -241,6 +241,48 @@ footer div {
   padding-bottom: 1rem;
 }
 
+/********** search page **********/
+#searchPage {
+  display: block;
+  margin: 2rem auto;
+  width: 80%;
+}
+
+#searchForm {
+  display: flex;
+
+  margin-bottom: 2rem;
+  border: 1px solid red;
+  padding: 1rem;
+}
+
+#searchInput {
+  width: 100%;
+  padding: .5rem;
+  margin-bottom: .5rem;
+  height: 2rem;
+}
+
+datalist {
+  border: 1px solid blue;
+  margin-top: 2rem;
+}
+
+#suggestion {
+  margin-top: .5rem;
+  height: 100px;
+
+} 
+
+#suggestion option {
+  color: red;
+  border: 2px solid black;
+}
+
+#searchVendors {
+  height: 300px;
+}
+
 /********** media queries **********/
 @media screen and (max-width: 870px) {
 
