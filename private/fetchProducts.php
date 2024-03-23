@@ -1,17 +1,12 @@
 <?php 
   require_once('initialize.php');
 
-  if(isset($_POST['categoryId'])) {
-    $categoryId = $_POST['categoryId'];
-
+  if(isset($_GET['categoryId'])) {
+    $categoryId = $_GET['categoryId'];
     $productSet = getProductsByCategory($categoryId);
 
-    $_SESSION['productSet'] = $productSet;
-    header('Location: new.php');
+    header('Content-Type: application/json');
+    echo json_encode($productSet);
     exit();
-  } else {
-    $_SESSION['error'] = "No category chosen. Try again.";
-    header('Location: new.php');
-    exit();
-  }
+  } 
 ?>

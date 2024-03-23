@@ -221,7 +221,7 @@ function deleteProductFromVendor($id_prod, $id_ven) {
 
   $result = mysqli_stmt_get_result($stmt_select);
   $row = mysqli_fetch_assoc($result);
-  $id_junc = $row['id_vjunc'];
+  $id_vjunc = $row['id_vjunc'];
 
   $sql = "DELETE FROM vendor_junction_vjunc ";
   $sql .= "WHERE id_vjunc = ?";
@@ -311,8 +311,24 @@ function getVendorsByProduct($productName) {
   return $vendors;
 }
 
-function addNewProduct($productName) {
-  
+function addNewProduct($vendorId, $productId) {
+  global $db;
+  $sql = "INSERT INTO vendor_junction_vjunc(id_ven_vjunc, id_prod_vjunc) ";
+  $sql .= "VALUES (?, ?) ";
+
+  $stmt = mysqli_prepare($db, $sql);
+  if(!$stmt) {
+    die("error preparing statement: " . mysqli_error($db));
+  }
+  mysqli_stmt_bind_param($stmt, "ii", $vendorId, $productId);
+  $result = mysqli_stmt_execute($stmt);
+  if(!$result) {
+    die("error executing statement: " . mysqli_stmt_error($stmt));
+  }
+  mysqli_stmt_close($stmt);
+  echo "<p>You have successfully entered your products!</p>";
+
+
 }
 
 ?>

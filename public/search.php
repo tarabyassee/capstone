@@ -1,7 +1,7 @@
 <?php 
 require_once('../private/initialize.php');
-$pageTitle = 'User Menu';
-
+$pageTitle = 'Search';
+$jsFile = 'js/script.js';
 include(SHARED_PATH . '/publicHeader.php');
 ?>
 
